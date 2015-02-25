@@ -349,7 +349,20 @@ stairs.register_stair_and_slab("stained_wood_pink", "bakedclay:stained_wood_pink
 		{"stained_wood_pink.png"},
 		"Pink Wooden", 
 		default.node_sound_wood_defaults())
-
+--[[ Xanado Only
+stairs.register_stair_and_slab("stone1", "bakedclay:stone1",
+		{cracky=3,not_in_craft_guide=1}, {"stone1.png"}, "Decorative Stone 1", default.node_sound_stone_defaults())
+stairs.register_stair_and_slab("stone2", "bakedclay:stone2",
+		{cracky=3,not_in_craft_guide=1}, {"stone2.png"}, "Decorative Stone 2", default.node_sound_stone_defaults())
+stairs.register_stair_and_slab("stone3", "bakedclay:stone3",
+		{cracky=3,not_in_craft_guide=1}, {"stone3.png"}, "Decorative Stone 3", default.node_sound_stone_defaults())
+stairs.register_stair_and_slab("stone4", "bakedclay:stone4",
+		{cracky=3,not_in_craft_guide=1}, {"stone4.png"}, "Decorative Stone 4", default.node_sound_stone_defaults())
+stairs.register_stair_and_slab("stone5", "bakedclay:stone5",
+		{cracky=3,not_in_craft_guide=1}, {"stone5.png"}, "Decorative Stone 5", default.node_sound_stone_defaults())
+stairs.register_stair_and_slab("stone6", "bakedclay:stone6",
+		{cracky=3,not_in_craft_guide=1}, {"stone6.png"}, "Decorative Stone 6", default.node_sound_stone_defaults())
+]]
 stairs.register_stair_and_slab("bakedclay_white", "bakedclay:white",
 		{cracky=3, not_in_craft_guide=1},
 		{"baked_clay_white.png"},
@@ -476,7 +489,7 @@ end
 
 if minetest.get_modpath("ethereal") then
 
-stairs.register_stair_and_slab("balboo_floor", "ethereal:bamboo_floor",
+stairs.register_stair_and_slab("bamboo_floor", "ethereal:bamboo_floor",
 	{snappy = 3, choppy = 3 , flammable=2, not_in_craft_guide=1},
 	{"bamboo_floor.png"},
 	"Bamboo",
