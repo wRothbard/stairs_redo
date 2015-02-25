@@ -1,0 +1,528 @@
+stairs = {}
+
+-- Node will be called stairs:stair_<subname>
+function stairs.register_stair(subname, recipeitem, groups, images, description, snds)
+	minetest.register_node("stairs:stair_" .. subname, {
+		description = description.." Stair",
+		drawtype = "nodebox",
+		tile_images = images,
+		paramtype = "light",
+		paramtype2 = "facedir",
+		is_ground_content = true,
+		groups = groups,
+		sounds = snds,
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+				{-0.5, 0, 0, 0.5, 0.5, 0.5},
+			},
+		},
+		on_place = function(itemstack, placer, pointed_thing)
+			if not minetest.is_protected(pointed_thing.under, placer:get_player_name()) then
+				minetest.rotate_node(itemstack, placer, pointed_thing)
+				return itemstack
+			end
+		end,
+	})
+
+	minetest.register_craft({
+		output = 'stairs:stair_' .. subname .. ' 4',
+		recipe = {
+			{recipeitem, "", ""},
+			{recipeitem, recipeitem, ""},
+			{recipeitem, recipeitem, recipeitem},
+		},
+	})
+end
+
+-- Node will be called stairs:slab_<subname>
+function stairs.register_slab(subname, recipeitem, groups, images, description, snds)
+	minetest.register_node("stairs:slab_" .. subname, {
+		description = description.." Slab",
+		drawtype = "nodebox",
+		tile_images = images,
+		paramtype = "light",
+		paramtype2 = "facedir",
+		is_ground_content = true,
+		groups = groups,
+		sounds = snds,
+		node_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+		},
+		selection_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+		},
+--		on_place = function(itemstack, placer, pointed_thing)
+--			if not minetest.is_protected(pointed_thing.under, placer:get_player_name()) then
+--				minetest.rotate_node(itemstack, placer, pointed_thing)
+--				return itemstack
+--			end
+--		end,
+	on_place = minetest.rotate_node
+	})
+
+	minetest.register_craft({
+		output = 'stairs:slab_' .. subname .. ' 3',
+		recipe = {
+			{recipeitem, recipeitem, recipeitem},
+		},
+	})
+end
+
+-- Node will be called stairs:corner_<subname>
+function stairs.register_corner(subname, recipeitem, groups, images, description, snds)
+	minetest.register_node("stairs:corner_" .. subname, {
+		description = description.." Corner",
+		drawtype = "nodebox",
+		tile_images = images,
+		paramtype = "light",
+		paramtype2 = "facedir",
+		is_ground_content = true,
+		groups = groups,
+		sounds = snds,
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+				{-0.5, 0, 0, 0, 0.5, 0.5},
+			},
+		},
+		on_place = function(itemstack, placer, pointed_thing)
+			if not minetest.is_protected(pointed_thing.under, placer:get_player_name()) then
+				minetest.rotate_node(itemstack, placer, pointed_thing)
+				return itemstack
+			end
+		end,
+	})
+
+	minetest.register_craft({
+		output = 'stairs:corner_' .. subname .. ' 4',
+		recipe = {
+			{"", "", ""},
+			{"", recipeitem, ""},
+			{recipeitem, recipeitem, recipeitem},
+		},
+	})
+end
+
+-- Nodes will be called stairs:{stair,slab}_<subname>
+function stairs.register_stair_and_slab(subname, recipeitem, groups, images, desc, snds)
+	stairs.register_stair(subname, recipeitem, groups, images, desc, snds)
+	stairs.register_slab(subname, recipeitem, groups, images, desc, snds)
+	stairs.register_corner(subname, recipeitem, groups, images, desc, snds)
+end
+
+
+--= Bakedclay Mod
+
+local use_bakedclay = minetest.get_modpath("bakedclay")
+if use_bakedclay then
+
+--= Soon to be Default Desert Cobble (kept in bakedclay mod for now)
+
+stairs.register_stair_and_slab("desert_cobble", "default:desert_cobble",
+		{cracky=3, stone=2},
+		{"default_desert_cobble.png"},
+		"Desert Cobble", 
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_white", "bakedclay:white",
+		{cracky=3},
+		{"baked_clay_white.png"},
+		"Baked Clay White",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_grey", "bakedclay:grey",
+		{cracky=3},
+		{"baked_clay_grey.png"},
+		"Baked Clay Grey",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_black", "bakedclay:black",
+		{cracky=3},
+		{"baked_clay_black.png"},
+		"Baked Clay Black",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_red", "bakedclay:red",
+		{cracky=3},
+		{"baked_clay_red.png"},
+		"Baked Clay Red",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_yellow", "bakedclay:yellow",
+		{cracky=3},
+		{"baked_clay_yellow.png"},
+		"Baked Clay Yellow",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_green", "bakedclay:green",
+		{cracky=3},
+		{"baked_clay_green.png"},
+		"Baked Clay Green",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_cyan", "bakedclay:cyan",
+		{cracky=3},
+		{"baked_clay_cyan.png"},
+		"Baked Clay Cyan",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_blue", "bakedclay:blue",
+		{cracky=3},
+		{"baked_clay_blue.png"},
+		"Baked Clay Blue",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_magenta", "bakedclay:magenta",
+		{cracky=3},
+		{"baked_clay_magenta.png"},
+		"Baked Clay Magenta",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_orange", "bakedclay:orange",
+		{cracky=3},
+		{"baked_clay_orange.png"},
+		"Baked Clay Orange",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_violet", "bakedclay:violet",
+		{cracky=3},
+		{"baked_clay_violet.png"},
+		"Baked Clay Violet",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_brown", "bakedclay:brown",
+		{cracky=3},
+		{"baked_clay_brown.png"},
+		"Baked Clay Brown",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_pink", "bakedclay:pink",
+		{cracky=3},
+		{"baked_clay_pink.png"},
+		"Baked Clay Pink",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_dark_grey", "bakedclay:dark_grey",
+		{cracky=3},
+		{"baked_clay_dark_grey.png"},
+		"Baked Clay Dark Grey",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bakedclay_dark_green", "bakedclay:dark_green",
+		{cracky=3},
+		{"baked_clay_dark_green.png"},
+		"Baked Clay Dark Green",
+		default.node_sound_stone_defaults())
+
+end
+
+--= Castle Mod
+
+local use_castle = minetest.get_modpath("castle")
+if use_castle then
+
+stairs.register_stair_and_slab("pavement", "castle:pavement",
+		{cracky=2},
+		{"castle_pavement_brick.png"},
+		"Paving",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("dungeon_stone", "castle:dungeon_stone",
+		{cracky=2},
+		{"castle_dungeon_stone.png"},
+		"Dungeon",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("stonewall", "castle:stonewall",
+		{cracky=3},
+		{"castle_stonewall.png"},
+		"Castle Wall",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("straw", "castle:straw",
+		{choppy=3, flammable=1, oddly_breakable_by_hand=3},
+		{"castle_straw.png"},
+		"Straw",
+		default.node_sound_leaves_defaults())
+
+end
+
+--= Ethereal Mod
+
+local use_ethereal = minetest.get_modpath("ethereal")
+if use_ethereal then
+
+stairs.register_stair_and_slab("dry_dirt", "ethereal:dry_dirt",
+		{crumbly=3},
+		{"ethereal_dry_dirt.png"},
+		"Dry Dirt",
+		default.node_sound_dirt_defaults())
+
+stairs.register_stair_and_slab("mushroom_trunk", "ethereal:mushroom_trunk",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{"mushroom_trunk.png"},
+		"Mushroom Trunk",
+		default.node_sound_wood_defaults())
+
+stairs.register_stair_and_slab("mushroom", "ethereal:mushroom",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{"mushroom_block.png"},
+		"Mushroom Top",
+		default.node_sound_wood_defaults())
+
+stairs.register_stair_and_slab("frost_wood", "ethereal:frost_wood",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{"frost_wood.png"},
+		"Frost Wood",
+		default.node_sound_wood_defaults())
+
+stairs.register_stair_and_slab("yellow_wood", "ethereal:yellow_wood",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{"yellow_wood.png"},
+		"Healing Tree Wood",
+		default.node_sound_wood_defaults())
+
+stairs.register_stair_and_slab("palm_wood", "ethereal:palm_wood",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{"moretrees_palm_wood.png"},
+		"Palm Wood",
+		default.node_sound_wood_defaults())
+
+end
+
+--= Wool Mod
+
+stairs.register_stair_and_slab("wool_white", "wool:white",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_white.png"},
+		"White Wool",
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_grey", "wool:grey",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_grey.png"},
+		"Grey Wool",
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_black", "wool:black",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_black.png"},
+		"Black Wool",
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_red", "wool:red",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_red.png"},
+		"Red Wool",
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_yellow", "wool:yellow",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_yellow.png"},
+		"Yellow Wool",
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_green", "wool:green",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_green.png"},
+		"Green Wool", 
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_cyan", "wool:cyan",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_cyan.png"},
+		"Cyan Wool", 
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_blue", "wool:blue",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_blue.png"},
+		"Blue Wool", 
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_magenta", "wool:magenta",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_magenta.png"},
+		"Magenta Wool", 
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_orange", "wool:orange",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_orange.png"},
+		"Orange Wool",
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_violet", "wool:violet",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_violet.png"},
+		"Violet Wool",
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_brown", "wool:brown",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_brown.png"},
+		"Brown Wool",
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_pink", "wool:pink",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_pink.png"},
+		"Pink Wool",
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_dark_grey", "wool:dark_grey",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_dark_grey.png"},
+		"Dark Grey Wool", 
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("wool_dark_green", "wool:dark_green",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		{"wool_dark_green.png"},
+		"Dark Green Wool", 
+		default.node_sound_defaults())
+
+--= Default Minetest
+
+--stairs.register_stair_and_slab("dirt", "default:dirt",
+--		{crumbly=3},
+--		{"default_dirt.png"},
+--		"Dirt",
+--		default.node_sound_dirt_defaults())
+
+stairs.register_stair_and_slab("cloud", "default:cloud",
+		{},
+		{"default_cloud.png"},
+		"Cloud",
+		default.node_sound_defaults())
+
+stairs.register_stair_and_slab("coal", "default:coalblock",
+		{cracky=3},
+		{"default_coal_block.png"},
+		"Coal", 
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("steel", "default:steelblock",
+		{cracky=1},
+		{"default_steel_block.png"},
+		"Steel", 
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("copper", "default:copperblock",
+		{cracky=1},
+		{"default_copper_block.png"},
+		"Copper",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("bronze", "default:bronzeblock",
+		{cracky=1},
+		{"default_bronze_block.png"},
+		"Bronze",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("mese", "default:mese",
+		{cracky=1},
+		{"default_mese_block.png"},
+		"Mese", 
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("gold", "default:goldblock",
+		{cracky=1},
+		{"default_gold_block.png"},
+		"Gold",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("diamond", "default:diamondblock",
+		{cracky=1,level=3},
+		{"default_diamond_block.png"},
+		"Diamond",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("wood", "default:wood",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{"default_wood.png"},
+		"Wooden", 
+		default.node_sound_wood_defaults())
+
+stairs.register_stair_and_slab("cactus", "default:cactus",
+		{snappy=2,choppy=2},
+		{"default_cactus_side.png"},
+		"Cactus",
+		default.node_sound_wood_defaults())
+
+stairs.register_stair_and_slab("stone", "default:stone",
+		{cracky=3},
+		{"default_stone.png"},
+		"Stone", 
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("desert_stone", "default:desert_stone",
+		{cracky=3},
+		{"default_desert_stone.png"},
+		"Desert Stone", 
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("cobble", "default:cobble",
+		{cracky=3},
+		{"default_cobble.png"},
+		"Cobble",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("mossycobble", "default:mossycobble",
+		{cracky=3},
+		{"default_mossycobble.png"},
+		"Mossy Cobble", 
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("brick", "default:brick",
+		{cracky=3},
+		{"default_brick.png"},
+		"Brick", 
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("sandstone", "default:sandstone",
+		{crumbly=3,cracky=2},
+		{"default_sandstone.png"},
+		"Sandstone",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("glass", "default:glass",
+		{crumbly=3,cracky=3},
+		{"default_glass.png"},
+		"Glass", 
+		default.node_sound_glass_defaults())
+
+stairs.register_stair_and_slab("obsidianglass", "default:obsidian_glass",
+		{crumbly=3,cracky=3},
+		{"default_obsidian_glass.png"},
+		"Obsidian Glass",
+		default.node_sound_glass_defaults())
+
+stairs.register_stair_and_slab("sandstonebrick", "default:sandstonebrick",
+		{crumbly=2,cracky=3},
+		{"default_sandstone_brick.png"},
+		"Sandstone Brick", 
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("obsidian", "default:obsidian",
+		{cracky=1},
+		{"default_obsidian.png"},
+		"Obsidian",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("junglewood", "default:junglewood",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{"default_junglewood.png"},
+		"Jungle Wood", 
+		default.node_sound_wood_defaults())
+
+stairs.register_stair_and_slab("stonebrick", "default:stonebrick",
+		{cracky=3},
+		{"default_stone_brick.png"},
+		"Stone Brick", 
+		default.node_sound_stone_defaults())
