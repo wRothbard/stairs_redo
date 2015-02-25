@@ -1,5 +1,6 @@
 stairs = {}
 stairs.mod = "redo"
+
 --stairs.woolsound = default.node_wool_defaults() -- Xanadu only
 stairs.woolsound = default.node_sound_leaves_defaults()
 
