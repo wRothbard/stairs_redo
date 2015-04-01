@@ -1,12 +1,23 @@
 stairs = {}
 stairs.mod = "redo"
 
---stairs.woolsound = default.node_wool_defaults() -- Xanadu only
-stairs.woolsound = default.node_sound_leaves_defaults()
+function default.node_wool_defaults(table)
+	table = table or {}
+	table.footstep = table.footstep or
+			{name="wool_coat_movement", gain=1.0}
+	table.dug = table.dug or
+			{name="wool_coat_movement", gain=0.25}
+	table.place = table.place or
+			{name="default_place_node", gain=1.0}
+	return table
+end
+
+stairs.woolsound = default.node_wool_defaults() -- Xanadu only
+--stairs.woolsound = default.node_sound_leaves_defaults()
 
 -- Node will be called stairs:stair_<subname>
 function stairs.register_stair(subname, recipeitem, groups, images, description, snds)
-	minetest.register_node("stairs:stair_" .. subname, {
+	minetest.register_node(":stairs:stair_" .. subname, {
 		description = description.." Stair",
 		drawtype = "nodebox",
 		tile_images = images,
@@ -36,7 +47,7 @@ end
 
 -- Node will be called stairs:slab_<subname>
 function stairs.register_slab(subname, recipeitem, groups, images, description, snds)
-	minetest.register_node("stairs:slab_" .. subname, {
+	minetest.register_node(":stairs:slab_" .. subname, {
 		description = description.." Slab",
 		drawtype = "nodebox",
 		tile_images = images,
@@ -61,7 +72,7 @@ end
 
 -- Node will be called stairs:corner_<subname>
 function stairs.register_corner(subname, recipeitem, groups, images, description, snds)
-	minetest.register_node("stairs:corner_" .. subname, {
+	minetest.register_node(":stairs:corner_" .. subname, {
 		description = description.." Corner",
 		drawtype = "nodebox",
 		tile_images = images,
@@ -91,7 +102,7 @@ end
 
 -- Node will be called stairs:invcorner_<subname>
 function stairs.register_invcorner(subname, recipeitem, groups, images, description, snds)
-	minetest.register_node("stairs:invcorner_" .. subname, {
+	minetest.register_node(":stairs:invcorner_" .. subname, {
 		description = description.." Inverted Corner",
 		drawtype = "nodebox",
 		tile_images = images,
@@ -129,12 +140,6 @@ function stairs.register_stair_and_slab(subname, recipeitem, groups, images, des
 end
 
 --= Default Minetest
-
---stairs.register_stair_and_slab("dirt", "default:dirt",
---		{crumbly=3},
---		{"default_dirt.png"},
---		"Dirt",
---		default.node_sound_dirt_defaults())
 
 stairs.register_stair_and_slab("wood", "default:wood",
 		{choppy=2,oddly_breakable_by_hand=2,flammable=3},
@@ -201,13 +206,7 @@ stairs.register_stair_and_slab("diamond", "default:diamondblock",
 		{"default_diamond_block.png"},
 		"Diamond",
 		default.node_sound_stone_defaults())
---[[
-stairs.register_stair_and_slab("cactus", "default:cactus",
-		{snappy=1,choppy=3,flammable=2, not_in_craft_guide=1},
-		{"default_cactus_side.png"},
-		"Cactus",
-		default.node_sound_wood_defaults())
-]]
+
 stairs.register_stair_and_slab("stone", "default:stone",
 		{cracky=3,stone=1, not_in_craft_guide=1},
 		{"default_stone.png"},
@@ -286,10 +285,9 @@ stairs.register_stair_and_slab("obsidian_brick", "default:obsidianbrick",
 		"Obsidian Brick",
 		default.node_sound_stone_defaults())
 
-
 --= Mobs Mod
 
-if minetest.get_modpath("mobs") then
+if mobs.mod and mobs.mod == "redo" then
 
 stairs.register_stair_and_slab("cheeseblock", "mobs:cheeseblock",
 		{crumbly=3, not_in_craft_guide=1},
@@ -350,7 +348,7 @@ stairs.register_stair_and_slab("stained_wood_pink", "bakedclay:stained_wood_pink
 		{"stained_wood_pink.png"},
 		"Pink Wooden", 
 		default.node_sound_wood_defaults())
---[[ Xanado Only
+-- Xanado Only
 stairs.register_stair_and_slab("stone1", "bakedclay:stone1",
 		{cracky=3,not_in_craft_guide=1}, {"stone1.png"}, "Decorative Stone 1", default.node_sound_stone_defaults())
 stairs.register_stair_and_slab("stone2", "bakedclay:stone2",
@@ -363,7 +361,25 @@ stairs.register_stair_and_slab("stone5", "bakedclay:stone5",
 		{cracky=3,not_in_craft_guide=1}, {"stone5.png"}, "Decorative Stone 5", default.node_sound_stone_defaults())
 stairs.register_stair_and_slab("stone6", "bakedclay:stone6",
 		{cracky=3,not_in_craft_guide=1}, {"stone6.png"}, "Decorative Stone 6", default.node_sound_stone_defaults())
-]]
+
+stairs.register_slab("desert_cobble1", "bakedclay:desert_cobble1",
+		{cracky=3,not_in_craft_guide=1}, {"desert_cobble1.png"}, "Decorative desert cobble 1", default.node_sound_stone_defaults())
+stairs.register_slab("desert_cobble5", "bakedclay:desert_cobble5",
+		{cracky=3,not_in_craft_guide=1}, {"desert_cobble5.png"}, "Decorative desert cobble 5", default.node_sound_stone_defaults())
+stairs.register_slab("desert_stone1", "bakedclay:desert_stone1",
+		{cracky=3,not_in_craft_guide=1}, {"desert_stone1.png"}, "Decorative desert stone 1", default.node_sound_stone_defaults())
+stairs.register_slab("desert_stone3", "bakedclay:desert_stone3",
+		{cracky=3,not_in_craft_guide=1}, {"desert_stone3.png"}, "Decorative desert stone 3", default.node_sound_stone_defaults())
+stairs.register_slab("desert_stone4", "bakedclay:desert_stone4",
+		{cracky=3,not_in_craft_guide=1}, {"desert_stone4.png"}, "Decorative desert stone 4", default.node_sound_stone_defaults())
+stairs.register_slab("desert_stone5", "bakedclay:desert_stone5",
+		{cracky=3,not_in_craft_guide=1}, {"desert_stone5.png"}, "Decorative desert stone 5", default.node_sound_stone_defaults())
+stairs.register_slab("red1", "bakedclay:red1",
+		{cracky=3,not_in_craft_guide=1}, {"baked_clay_red1.png"}, "Decorative baked red clay 1", default.node_sound_stone_defaults())
+stairs.register_slab("bred2", "bakedclay:red2",
+		{cracky=3,not_in_craft_guide=1}, {"baked_clay_red2.png"}, "Decorative baked red clay 2", default.node_sound_stone_defaults())
+
+
 stairs.register_stair_and_slab("bakedclay_white", "bakedclay:white",
 		{cracky=3, not_in_craft_guide=1},
 		{"baked_clay_white.png"},
