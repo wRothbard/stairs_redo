@@ -287,11 +287,11 @@ stairs.register_stair_and_slab("obsidian_brick", "default:obsidianbrick",
 
 --= Mobs Mod
 
-if mobs.mod and mobs.mod == "redo" then
+if minetest.get_modpath("mobs") and mobs.mod and mobs.mod == "redo" then
 
 stairs.register_stair_and_slab("cheeseblock", "mobs:cheeseblock",
 		{crumbly=3, not_in_craft_guide=1},
-		{"cheeseblock.png"},
+		{"mobs_cheeseblock.png"},
 		"Cheese Block",
 		default.node_sound_dirt_defaults())
 		
