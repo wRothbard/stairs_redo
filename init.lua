@@ -57,14 +57,23 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 		on_place = minetest.rotate_node
 	})
 
+	-- stair recipe
 	minetest.register_craft({
-		output = 'stairs:stair_' .. subname .. ' 6',
+		output = 'stairs:stair_' .. subname .. ' 4', -- was 6
 		recipe = {
 			{recipeitem, "", ""},
 			{recipeitem, recipeitem, ""},
 			{recipeitem, recipeitem, recipeitem},
 		},
 	})
+
+	-- stair to original material recipe
+	minetest.register_craft({
+		type = "shapeless",
+		output = recipeitem .. " 3",
+		recipe = {"stairs:stair_" .. subname, "stairs:stair_" .. subname}
+	})
+
 end
 
 -- Node will be called stairs:slab_<subname>
@@ -85,11 +94,19 @@ function stairs.register_slab(subname, recipeitem, groups, images, description, 
 		on_place = minetest.rotate_node
 	})
 
+	-- slab recipe
 	minetest.register_craft({
 		output = 'stairs:slab_' .. subname .. ' 6',
 		recipe = {
 			{recipeitem, recipeitem, recipeitem},
 		},
+	})
+
+	-- slab to original material recipe
+	minetest.register_craft({
+		type = "shapeless",
+		output = recipeitem,
+		recipe = {"stairs:slab_" .. subname, "stairs:slab_" .. subname}
 	})
 end
 
@@ -114,6 +131,7 @@ function stairs.register_corner(subname, recipeitem, groups, images, description
 		on_place = minetest.rotate_node
 	})
 
+	-- corner stair recipe
 	minetest.register_craft({
 		output = 'stairs:corner_' .. subname .. ' 4',
 		recipe = {
@@ -121,6 +139,13 @@ function stairs.register_corner(subname, recipeitem, groups, images, description
 			{"", recipeitem, ""},
 			{recipeitem, recipeitem, recipeitem},
 		},
+	})
+
+	-- corner stair to original material recipe
+	minetest.register_craft({
+		type = "shapeless",
+		output = recipeitem,
+		recipe = {"stairs:corner_" .. subname}
 	})
 end
 
@@ -146,13 +171,22 @@ function stairs.register_invcorner(subname, recipeitem, groups, images, descript
 		on_place = minetest.rotate_node
 	})
 
+	-- inside corner stair recipe
 	minetest.register_craft({
-		output = 'stairs:invcorner_' .. subname .. ' 8',
+		output = 'stairs:invcorner_' .. subname .. ' 6', -- was 8
 		recipe = {
 			{recipeitem, recipeitem, ""},
 			{recipeitem, recipeitem, recipeitem},
 			{recipeitem, recipeitem, recipeitem},
 		},
+	})
+
+	-- inside corner stair to original material recipe
+	minetest.register_craft({
+		type = "shapeless",
+		output = recipeitem .. " 4",
+		recipe = {"stairs:invcorner_" .. subname,
+		"stairs:invcorner_" .. subname, "stairs:invcorner_" .. subname}
 	})
 end
 
@@ -193,7 +227,7 @@ stairs.register_all("cobble", "default:cobble",
 	{"default_cobble.png"},
 	"Cobble",
 	stairs.stone)
-		
+
 stairs.register_all("desert_cobble", "default:desert_cobble",
 	{cracky=3, stone=2, not_in_craft_guide=1},
 	{"default_desert_cobble.png"},
@@ -319,6 +353,29 @@ stairs.register_all("obsidian_brick", "default:obsidianbrick",
 	{"default_obsidian_brick.png"},
 	"Obsidian Brick",
 	stairs.stone)
+
+--= More Ores Mod
+if minetest.get_modpath("moreores") then
+
+stairs.register_all("tin", "moreores:tin_block",
+	{cracky=1,level=2, not_in_craft_guide=1},
+	{"moreores_tin_block.png"},
+	"Tin",
+	stairs.stone)
+
+stairs.register_all("silver", "moreores:silver_block",
+	{cracky=1,level=2, not_in_craft_guide=1},
+	{"moreores_silver_block.png"},
+	"Silver",
+	stairs.stone)
+
+stairs.register_all("mithril", "moreores:mithril_block",
+	{cracky=1,level=2, not_in_craft_guide=1},
+	{"moreores_mithril_block.png"},
+	"Mithril",
+	stairs.stone)
+
+end
 
 --= Farming Mod
 if minetest.get_modpath("farming") then
@@ -537,6 +594,12 @@ stairs.register_all("bred2", "bakedclay:red2",
 	"Decorative baked red clay 2",
 	stairs.stone)
 
+stairs.register_slab("glass2", "xanadu:glass2",
+	{cracky = 2, level = 3, not_in_craft_guide = 1},
+	{"glass2.png"},
+	"Decorative Invisible Glass",
+	stairs.glass)
+
 end
 
 --= Baked Clay mod
@@ -682,7 +745,7 @@ stairs.register_all("icebrick", "ethereal:icebrick",
 	{"brick_ice.png"},
 	"Ice Brick",
 	stairs.glass)
-		
+
 stairs.register_all("snowbrick", "ethereal:snowbrick",
 	{crumbly=3, melts = 1, not_in_craft_guide=1},
 	{"brick_snow.png"},
@@ -752,6 +815,12 @@ stairs.register_all("acacia_wood", "ethereal:acacia_wood",
 	"Acacia Wood",
 	stairs.wood)
 
+stairs.register_all("birch_wood", "ethereal:birch_wood",
+	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
+	{"moretrees_birch_wood.png"},
+	"Birch Wood",
+	stairs.wood)
+
 end
 
 --= Wool Mod
@@ -760,7 +829,7 @@ if minetest.get_modpath("wool") then
 
 grp = {
 	snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3,
-	wool = 1, not_in_craft_guide = 1
+	not_in_craft_guide = 1
 }
 
 stairs.register_all("wool_white", "wool:white",
