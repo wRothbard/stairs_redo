@@ -22,6 +22,7 @@ stairs.wool = default.node_sound_wool_defaults() -- Xanadu only
 
 -- Node will be called stairs:stair_<subname>
 function stairs.register_stair(subname, recipeitem, groups, images, description, snds)
+	groups.stair = 1
 	minetest.register_node(":stairs:stair_" .. subname, {
 		description = description.." Stair",
 --		drawtype = "nodebox",
@@ -78,6 +79,7 @@ end
 
 -- Node will be called stairs:slab_<subname>
 function stairs.register_slab(subname, recipeitem, groups, images, description, snds)
+	groups.slab = 1
 	minetest.register_node(":stairs:slab_" .. subname, {
 		description = description.." Slab",
 		drawtype = "nodebox",
@@ -222,6 +224,12 @@ stairs.register_all("pine_wood", "default:pinewood",
 	"Pine Wood",
 	stairs.wood)
 
+stairs.register_all("aspen_wood", "default:aspen_wood",
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, not_in_craft_guide=1},
+	{"default_aspen_wood.png"},
+	"Aspen Wood",
+	default.node_sound_wood_defaults())
+
 stairs.register_all("cobble", "default:cobble",
 	{cracky=3,stone=2},
 	{"default_cobble.png"},
@@ -354,6 +362,49 @@ stairs.register_all("obsidian_brick", "default:obsidianbrick",
 	"Obsidian Brick",
 	stairs.stone)
 
+--= Coloured Blocks Mod
+if minetest.get_modpath("cblocks") then
+
+local colours = {
+	{"black",      "Black",      "#000000b0"},
+--	{"blue",       "Blue",       "#015dbb70"},
+	{"brown",      "Brown",      "#a78c4570"},
+--	{"cyan",       "Cyan",       "#01ffd870"},
+--	{"dark_green", "Dark Green", "#005b0770"},
+	{"dark_grey",  "Dark Grey",  "#303030b0"},
+--	{"green",      "Green",      "#61ff0170"},
+	{"grey",       "Grey",       "#5b5b5bb0"},
+--	{"magenta",    "Magenta",    "#ff05bb70"},
+--	{"orange",     "Orange",     "#ff840170"},
+--	{"pink",       "Pink",       "#ff65b570"},
+--	{"red",        "Red",        "#ff000070"},
+--	{"violet",     "Violet",     "#2000c970"},
+--	{"white",      "White",      "#abababc0"},
+--	{"yellow",     "Yellow",     "#e3ff0070"},
+}
+
+for i = 1, #colours, 1 do
+
+-- wood stair
+
+stairs.register_all(colours[i][1] .. "_wood", "cblocks:wood_" .. colours[i][1],
+	{choppy=2,oddly_breakable_by_hand=2,flammable=3, not_in_craft_guide=1},
+	{"default_wood.png^[colorize:" .. colours[i][3]},
+	colours[i][2] .. " Wooden",
+	stairs.wood)
+--[[
+minetest.register_node("cblocks:wood_" .. colours[i][1], {
+	description = colours[i][2] .. " Wooden Planks",
+	tiles = {"default_wood.png^[colorize:" .. colours[i][3]},
+	is_ground_content = false,
+	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, wood = 1},
+	sounds = default.node_sound_wood_defaults(),
+})]]
+
+end --for
+
+end
+
 --= More Ores Mod
 if minetest.get_modpath("moreores") then
 
@@ -414,9 +465,9 @@ if minetest.get_modpath("lapis") then
 
 grp = {cracky = 3, not_in_craft_guide = 1}
 
-stairs.register_all("lapis", "lapis:lapisblock",
+stairs.register_all("lapis_block", "lapis:lapis_block",
 	grp,
-	{"lapis_block.png"},
+	{"lapis_block_side.png"},
 	"Lapis",
 	stairs.stone)
 
@@ -430,18 +481,6 @@ stairs.register_all("lapis_cobble", "lapis:lapis_cobble",
 	grp,
 	{"lapis_cobble.png"},
 	"Lapis Cobble",
-	stairs.stone)
-
-stairs.register_all("lazurite", "lapis:lazurite",
-	grp,
-	{"lapis_lazurite.png"},
-	"Lazurite",
-	stairs.stone)
-
-stairs.register_all("lazurite_brick", "lapis:lazurite_brick",
-	grp,
-	{"lapis_lazurite_brick.png"},
-	"Lazurite Brick",
 	stairs.stone)
 
 end
@@ -571,6 +610,11 @@ stairs.register_slab("desert_stone3", "bakedclay:desert_stone3",
 	stairs.stone)
 
 stairs.register_slab("desert_stone4", "bakedclay:desert_stone4",
+	grp,
+	{"desert_stone4.png"},
+	"Decorative desert stone 4",
+	stairs.stone)
+stairs.register_stair("desert_stone4", "bakedclay:desert_stone4",
 	grp,
 	{"desert_stone4.png"},
 	"Decorative desert stone 4",
@@ -811,7 +855,7 @@ stairs.register_all("redwood_wood", "ethereal:redwood_wood",
 
 stairs.register_all("acacia_wood", "ethereal:acacia_wood",
 	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
-	{"moretrees_acacia_wood.png"},
+	{"default_acacia_wood.png"},
 	"Acacia Wood",
 	stairs.wood)
 
