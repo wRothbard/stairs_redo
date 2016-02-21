@@ -242,11 +242,25 @@ stairs.register_all("desert_cobble", "default:desert_cobble",
 	"Desert Cobble", 
 	stairs.stone)
 
-stairs.register_all("cloud", "default:cloud",
+stairs.register_stair("cloud", "default:cloud",
 	{unbreakable=1, not_in_craft_guide=1},
 	{"default_cloud.png"},
 	"Cloud",
 	stairs.wool)
+
+minetest.override_item("stairs:stair_cloud", {
+	on_blast = function() end,
+})
+
+stairs.register_slab("cloud", "default:cloud",
+	{unbreakable=1, not_in_craft_guide=1},
+	{"default_cloud.png"},
+	"Cloud",
+	stairs.wool)
+
+minetest.override_item("stairs:slab_cloud", {
+	on_blast = function() end,
+})
 
 stairs.register_all("coal", "default:coalblock",
 	{cracky=3, not_in_craft_guide=1},
