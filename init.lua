@@ -24,7 +24,7 @@ stairs.wool = default.node_sound_wool_defaults() -- Xanadu only
 function stairs.register_stair(subname, recipeitem, groups, images, description, snds)
 	groups.stair = 1
 	minetest.register_node(":stairs:stair_" .. subname, {
-		description = description.." Stair",
+		description = description,
 --		drawtype = "nodebox",
 		drawtype = "mesh",
 		mesh = "stairs_stair.obj",
@@ -81,7 +81,7 @@ end
 function stairs.register_slab(subname, recipeitem, groups, images, description, snds)
 	groups.slab = 1
 	minetest.register_node(":stairs:slab_" .. subname, {
-		description = description.." Slab",
+		description = description,
 		drawtype = "nodebox",
 		tiles = images,
 		paramtype = "light",
@@ -115,7 +115,7 @@ end
 -- Node will be called stairs:corner_<subname>
 function stairs.register_corner(subname, recipeitem, groups, images, description, snds)
 	minetest.register_node(":stairs:corner_" .. subname, {
-		description = description.." Corner",
+		description = description,
 		drawtype = "nodebox",
 		tiles = images,
 		paramtype = "light",
@@ -154,7 +154,7 @@ end
 -- Node will be called stairs:invcorner_<subname>
 function stairs.register_invcorner(subname, recipeitem, groups, images, description, snds)
 	minetest.register_node(":stairs:invcorner_" .. subname, {
-		description = description.." Inverted Corner",
+		description = description,
 		drawtype = "nodebox",
 		tiles = images,
 		paramtype = "light",
@@ -192,12 +192,23 @@ function stairs.register_invcorner(subname, recipeitem, groups, images, descript
 	})
 end
 
+-- Nodes will be called stairs:{stair,slab}_<subname>
+function stairs.register_stair_and_slab(subname, recipeitem, groups, images,
+		desc_stair, desc_slab, sounds)
+	stairs.register_stair(subname, recipeitem, groups, images, desc_stair, sounds)
+	stairs.register_slab(subname, recipeitem, groups, images, desc_slab, sounds)
+end
+
 -- Nodes will be called stairs:{stair,slab,corner,invcorner}_<subname>
 function stairs.register_all(subname, recipeitem, groups, images, desc, snds)
-	stairs.register_stair(subname, recipeitem, groups, images, desc, snds)
-	stairs.register_slab(subname, recipeitem, groups, images, desc, snds)
-	stairs.register_corner(subname, recipeitem, groups, images, desc, snds)
-	stairs.register_invcorner(subname, recipeitem, groups, images, desc, snds)
+	local str = " Stair"
+	stairs.register_stair(subname, recipeitem, groups, images, str .. desc, snds)
+	str = " Slab"
+	stairs.register_slab(subname, recipeitem, groups, images, str .. desc, snds)
+	str = " Corner"
+	stairs.register_corner(subname, recipeitem, groups, images, str .. desc, snds)
+	str = " Inverted Corner"
+	stairs.register_invcorner(subname, recipeitem, groups, images, str .. desc, snds)
 end
 
 -- Helper
@@ -245,7 +256,7 @@ stairs.register_all("desert_cobble", "default:desert_cobble",
 stairs.register_stair("cloud", "default:cloud",
 	{unbreakable=1, not_in_craft_guide=1},
 	{"default_cloud.png"},
-	"Cloud",
+	"Cloud Stair",
 	stairs.wool)
 
 minetest.override_item("stairs:stair_cloud", {
@@ -255,7 +266,7 @@ minetest.override_item("stairs:stair_cloud", {
 stairs.register_slab("cloud", "default:cloud",
 	{unbreakable=1, not_in_craft_guide=1},
 	{"default_cloud.png"},
-	"Cloud",
+	"Cloud Slab",
 	stairs.wool)
 
 minetest.override_item("stairs:slab_cloud", {
@@ -762,11 +773,11 @@ end
 
 if minetest.get_modpath("castle") then
 
-stairs.register_all("pavement", "castle:pavement",
-	{cracky=2, not_in_craft_guide=1},
-	{"castle_pavement_brick.png"},
-	"Paving",
-	stairs.stone)
+--stairs.register_all("pavement", "castle:pavement",
+--	{cracky=2, not_in_craft_guide=1},
+--	{"castle_pavement_brick.png"},
+--	"Paving",
+--	stairs.stone)
 
 stairs.register_all("dungeon_stone", "castle:dungeon_stone",
 	{cracky=2, not_in_craft_guide=1},
@@ -779,105 +790,6 @@ stairs.register_all("stonewall", "castle:stonewall",
 	{"castle_stonewall.png"},
 	"Castle Wall",
 	stairs.stone)
-
-end
-
---= Ethereal Mod
-
-if minetest.get_modpath("ethereal") then
-
-stairs.register_all("bamboo_floor", "ethereal:bamboo_floor",
-	{snappy = 3, choppy = 3 , flammable=2, not_in_craft_guide=1},
-	{"bamboo_floor.png"},
-	"Bamboo",
-	stairs.wood)
-
-stairs.register_all("crystal_block", "ethereal:crystal_block",
-	{cracky=1, level=2, not_in_craft_guide=1},
-	{"crystal_block.png"},
-	"Crystal Block",
-	stairs.glass)
-
-stairs.register_all("icebrick", "ethereal:icebrick",
-	{crumbly=3, melts = 1, not_in_craft_guide=1},
-	{"brick_ice.png"},
-	"Ice Brick",
-	stairs.glass)
-
-stairs.register_all("snowbrick", "ethereal:snowbrick",
-	{crumbly=3, melts = 1, not_in_craft_guide=1},
-	{"brick_snow.png"},
-	"Snow Brick",
-	default.node_sound_dirt_defaults({
-		footstep = {name="default_snow_footstep", gain=0.25},
-		dug = {name="default_snow_footstep", gain=0.75},
-	}))
-
-stairs.register_all("dry_dirt", "ethereal:dry_dirt",
-	{crumbly=3, not_in_craft_guide=1},
-	{"ethereal_dry_dirt.png"},
-	"Dry Dirt",
-	stairs.dirt)
-
-stairs.register_all("mushroom_trunk", "ethereal:mushroom_trunk",
-	{choppy=2,oddly_breakable_by_hand=1,flammable=2, not_in_craft_guide=1},
-	{"mushroom_trunk.png"},
-	"Mushroom Trunk",
-	stairs.wood)
-
-stairs.register_all("mushroom", "ethereal:mushroom",
-	{choppy=2,oddly_breakable_by_hand=1,flammable=2, not_in_craft_guide=1},
-	{"mushroom_block.png"},
-	"Mushroom Top",
-	stairs.wood)
-
-stairs.register_all("frost_wood", "ethereal:frost_wood",
-	{choppy=2,oddly_breakable_by_hand=1,put_out_fire=1, not_in_craft_guide=1},
-	{"frost_wood.png"},
-	"Frost Wood",
-	stairs.wood)
-
-stairs.register_all("yellow_wood", "ethereal:yellow_wood",
-	{choppy=2,oddly_breakable_by_hand=1,put_out_fire=1, not_in_craft_guide=1},
-	{"yellow_wood.png"},
-	"Healing Tree Wood",
-	stairs.wood)
-
-stairs.register_all("palm_wood", "ethereal:palm_wood",
-	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
-	{"moretrees_palm_wood.png"},
-	"Palm Wood",
-	stairs.wood)
-
-stairs.register_all("banana_wood", "ethereal:banana_wood",
-	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
-	{"banana_wood.png"},
-	"Banana Wood",
-	stairs.wood)
-
-stairs.register_all("willow_wood", "ethereal:willow_wood",
-	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
-	{"willow_wood.png"},
-	"Willow Wood",
-	stairs.wood)
-
-stairs.register_all("redwood_wood", "ethereal:redwood_wood",
-	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
-	{"redwood_wood.png"},
-	"Redwood Wood",
-	stairs.wood)
-
-stairs.register_all("acacia_wood", "ethereal:acacia_wood",
-	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
-	{"default_acacia_wood.png"},
-	"Acacia Wood",
-	stairs.wood)
-
-stairs.register_all("birch_wood", "ethereal:birch_wood",
-	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
-	{"moretrees_birch_wood.png"},
-	"Birch Wood",
-	stairs.wood)
 
 end
 
