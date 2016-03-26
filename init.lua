@@ -279,19 +279,19 @@ stairs.register_all("coal", "default:coalblock",
 	"Coal",
 	stairs.stone)
 
-stairs.register_all("steel", "default:steelblock",
+stairs.register_all("steelblock", "default:steelblock",
 	{cracky=1,level=2, not_in_craft_guide=1},
 	{"default_steel_block.png"},
 	"Steel",
 	stairs.stone)
 
-stairs.register_all("copper", "default:copperblock",
+stairs.register_all("copperblock", "default:copperblock",
 	{cracky=1,level=2, not_in_craft_guide=1},
 	{"default_copper_block.png"},
 	"Copper",
 	stairs.stone)
 
-stairs.register_all("bronze", "default:bronzeblock",
+stairs.register_all("bronzeblock", "default:bronzeblock",
 	{cracky=1,level=2, not_in_craft_guide=1},
 	{"default_bronze_block.png"},
 	"Bronze",
@@ -303,13 +303,13 @@ stairs.register_all("mese", "default:mese",
 	"Mese",
 	stairs.stone)
 
-stairs.register_all("gold", "default:goldblock",
+stairs.register_all("goldblock", "default:goldblock",
 	{cracky=1, not_in_craft_guide=1},
 	{"default_gold_block.png"},
 	"Gold",
 	stairs.stone)
 
-stairs.register_all("diamond", "default:diamondblock",
+stairs.register_all("diamondblock", "default:diamondblock",
 	{cracky=1,level=3, not_in_craft_guide=1},
 	{"default_diamond_block.png"},
 	"Diamond",
@@ -351,7 +351,7 @@ stairs.register_all("glass", "default:glass",
 	"Glass",
 	stairs.glass)
 
-stairs.register_all("obsidianglass", "default:obsidian_glass",
+stairs.register_all("obsidian_glass", "default:obsidian_glass",
 	{cracky=2,level=3, not_in_craft_guide=1},
 	{"default_obsidian_glass.png"},
 	"Obsidian Glass",
@@ -381,7 +381,7 @@ stairs.register_all("desert_stonebrick", "default:desert_stonebrick",
 	"Desert Stone Brick",
 	stairs.stone)
 
-stairs.register_all("obsidian_brick", "default:obsidianbrick",
+stairs.register_all("obsidianbrick", "default:obsidianbrick",
 	{cracky=1,level=3, unbreakable=1, not_in_craft_guide=1},
 	{"default_obsidian_brick.png"},
 	"Obsidian Brick",
@@ -417,14 +417,6 @@ stairs.register_all(colours[i][1] .. "_wood", "cblocks:wood_" .. colours[i][1],
 	{"default_wood.png^[colorize:" .. colours[i][3]},
 	colours[i][2] .. " Wooden",
 	stairs.wood)
---[[
-minetest.register_node("cblocks:wood_" .. colours[i][1], {
-	description = colours[i][2] .. " Wooden Planks",
-	tiles = {"default_wood.png^[colorize:" .. colours[i][3]},
-	is_ground_content = false,
-	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, wood = 1},
-	sounds = default.node_sound_wood_defaults(),
-})]]
 
 end --for
 
@@ -433,19 +425,19 @@ end
 --= More Ores Mod
 if minetest.get_modpath("moreores") then
 
-stairs.register_all("tin", "moreores:tin_block",
+stairs.register_all("tin_block", "moreores:tin_block",
 	{cracky=1,level=2, not_in_craft_guide=1},
 	{"moreores_tin_block.png"},
 	"Tin",
 	stairs.stone)
 
-stairs.register_all("silver", "moreores:silver_block",
+stairs.register_all("silver_block", "moreores:silver_block",
 	{cracky=1,level=2, not_in_craft_guide=1},
 	{"moreores_silver_block.png"},
 	"Silver",
 	stairs.stone)
 
-stairs.register_all("mithril", "moreores:mithril_block",
+stairs.register_all("mithril_block", "moreores:mithril_block",
 	{cracky=1,level=2, not_in_craft_guide=1},
 	{"moreores_mithril_block.png"},
 	"Mithril",
@@ -542,21 +534,11 @@ if minetest.get_modpath("xanadu") then
 
 grp = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, not_in_craft_guide = 1}
 
-minetest.register_alias("stairs:slab_stained_wood_brown", "stairs:slab_junglewood")
-minetest.register_alias("stairs:stair_stained_wood_brown", "stairs:stair_junglewood")
-minetest.register_alias("stairs:invcorner_stained_wood_brown", "stairs:invcorner_junglewood")
-minetest.register_alias("stairs:corner_stained_wood_brown", "stairs:corner_junglewood")
-
 stairs.register_all("stained_wood_white", "xanadu:stained_wood_white",
 	grp,
 	{"stained_wood_white.png"},
 	"White Wooden",
 	stairs.wood)
-
-minetest.register_alias("stairs:slab_stained_wood_pink", "stairs:slab_acacia_wood")
-minetest.register_alias("stairs:stair_stained_wood_pink", "stairs:stair_acacia_wood")
-minetest.register_alias("stairs:invcorner_stained_wood_pink", "stairs:invcorner_acacia_wood")
-minetest.register_alias("stairs:corner_stained_wood_pink", "stairs:corner_acacia_wood")
 
 stairs.register_all("stained_wood_red", "xanadu:stained_wood_red",
 	grp,
@@ -568,96 +550,96 @@ stairs.register_all("stained_wood_red", "xanadu:stained_wood_red",
 
 grp = {cracky = 3, not_in_craft_guide = 1}
 
-stairs.register_all("stone1", "bakedclay:stone1",
+stairs.register_all("stone1", "xanadu:stone1",
 	grp,
 	{"stone1.png"},
 	"Decorative Stone 1",
 	stairs.stone)
 
-stairs.register_all("stone2", "bakedclay:stone2",
+stairs.register_all("stone2", "xanadu:stone2",
 	grp,
 	{"stone2.png"},
 	"Decorative Stone 2",
 	stairs.stone)
 
-stairs.register_all("stone3", "bakedclay:stone3",
+stairs.register_all("stone3", "xanadu:stone3",
 	grp,
 	{"stone3.png"},
 	"Decorative Stone 3",
 	stairs.stone)
 
-stairs.register_all("stone4", "bakedclay:stone4",
+stairs.register_all("stone4", "xanadu:stone4",
 	grp,
 	{"stone4.png"},
 	"Decorative Stone 4",
 	stairs.stone)
 
-stairs.register_all("stone5", "bakedclay:stone5",
+stairs.register_all("stone5", "xanadu:stone5",
 	grp,
 	{"stone5.png"},
 	"Decorative Stone 5",
 	stairs.stone)
 
-stairs.register_all("stone6", "bakedclay:stone6",
+stairs.register_all("stone6", "xanadu:stone6",
 	grp,
 	{"stone6.png"},
 	"Decorative Stone 6",
 	stairs.stone)
 
-stairs.register_all("sandstonebrick4", "bakedclay:sandstonebrick4",
+stairs.register_all("sandstonebrick4", "xanadu:sandstonebrick4",
 	grp,
 	{"sandstonebrick4.png"},
 	"Decorative Sandstone 4",
 	stairs.stone)
 
-stairs.register_slab("desert_cobble1", "bakedclay:desert_cobble1",
+stairs.register_slab("desert_cobble1", "xanadu:desert_cobble1",
 	grp,
 	{"desert_cobble1.png"},
 	"Decorative desert cobble 1",
 	stairs.stone)
 
-stairs.register_slab("desert_cobble5", "bakedclay:desert_cobble5",
+stairs.register_slab("desert_cobble5", "xanadu:desert_cobble5",
 	grp,
 	{"desert_cobble5.png"},
 	"Decorative desert cobble 5",
 	stairs.stone)
 
-stairs.register_slab("desert_stone1", "bakedclay:desert_stone1",
+stairs.register_slab("desert_stone1", "xanadu:desert_stone1",
 	grp,
 	{"desert_stone1.png"},
 	"Decorative desert stone 1",
 	stairs.stone)
 
-stairs.register_slab("desert_stone3", "bakedclay:desert_stone3",
+stairs.register_slab("desert_stone3", "xanadu:desert_stone3",
 	grp,
 	{"desert_stone3.png"},
 	"Decorative desert stone 3",
 	stairs.stone)
 
-stairs.register_slab("desert_stone4", "bakedclay:desert_stone4",
+stairs.register_slab("desert_stone4", "xanadu:desert_stone4",
 	grp,
 	{"desert_stone4.png"},
 	"Decorative desert stone 4",
 	stairs.stone)
-stairs.register_stair("desert_stone4", "bakedclay:desert_stone4",
+stairs.register_stair("desert_stone4", "xanadu:desert_stone4",
 	grp,
 	{"desert_stone4.png"},
 	"Decorative desert stone 4",
 	stairs.stone)
 
-stairs.register_slab("desert_stone5", "bakedclay:desert_stone5",
+stairs.register_slab("desert_stone5", "xanadu:desert_stone5",
 	grp,
 	{"desert_stone5.png"},
 	"Decorative desert stone 5",
 	stairs.stone)
 
-stairs.register_slab("red1", "bakedclay:red1",
+stairs.register_slab("red1", "xanadu:red1",
 	grp,
 	{"baked_clay_red1.png"},
 	"Decorative baked red clay 1",
 	stairs.stone)
 
-stairs.register_all("bred2", "bakedclay:red2",
+stairs.register_all("bred2", "xanadu:red2",
 	grp,
 	{"baked_clay_red2.png"},
 	"Decorative baked red clay 2",
