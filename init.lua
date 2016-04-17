@@ -147,7 +147,7 @@ function stairs.register_corner(subname, recipeitem, groups, images, description
 	minetest.register_craft({
 		type = "shapeless",
 		output = recipeitem,
-		recipe = {"stairs:corner_" .. subname}
+		recipe = {"stairs:corner_" .. subname, "stairs:corner_" .. subname}
 	})
 end
 
@@ -233,6 +233,12 @@ stairs.register_all("pine_wood", "default:pinewood",
 	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
 	{"default_pine_wood.png"},
 	"Pine Wood",
+	stairs.wood)
+
+stairs.register_all("acacia_wood", "default:acacia_wood",
+	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
+	{"default_acacia_wood.png"},
+	"Acacia Wood",
 	stairs.wood)
 
 stairs.register_all("aspen_wood", "default:aspen_wood",
@@ -387,26 +393,26 @@ stairs.register_all("obsidianbrick", "default:obsidianbrick",
 	"Obsidian Brick",
 	stairs.stone)
 
---= Coloured Blocks Mod
-if minetest.get_modpath("cblocks") then
-
 local colours = {
 	{"black",      "Black",      "#000000b0"},
---	{"blue",       "Blue",       "#015dbb70"},
+	{"blue",       "Blue",       "#015dbb70"},
 	{"brown",      "Brown",      "#a78c4570"},
---	{"cyan",       "Cyan",       "#01ffd870"},
---	{"dark_green", "Dark Green", "#005b0770"},
+	{"cyan",       "Cyan",       "#01ffd870"},
+	{"dark_green", "Dark Green", "#005b0770"},
 	{"dark_grey",  "Dark Grey",  "#303030b0"},
---	{"green",      "Green",      "#61ff0170"},
+	{"green",      "Green",      "#61ff0170"},
 	{"grey",       "Grey",       "#5b5b5bb0"},
---	{"magenta",    "Magenta",    "#ff05bb70"},
---	{"orange",     "Orange",     "#ff840170"},
---	{"pink",       "Pink",       "#ff65b570"},
---	{"red",        "Red",        "#ff000070"},
---	{"violet",     "Violet",     "#2000c970"},
---	{"white",      "White",      "#abababc0"},
---	{"yellow",     "Yellow",     "#e3ff0070"},
+	{"magenta",    "Magenta",    "#ff05bb70"},
+	{"orange",     "Orange",     "#ff840170"},
+	{"pink",       "Pink",       "#ff65b570"},
+	{"red",        "Red",        "#ff000070"},
+	{"violet",     "Violet",     "#2000c970"},
+	{"white",      "White",      "#abababc0"},
+	{"yellow",     "Yellow",     "#e3ff0070"},
 }
+
+--= Coloured Blocks Mod
+if minetest.get_modpath("cblocks") then
 
 for i = 1, #colours, 1 do
 
@@ -657,97 +663,15 @@ end
 
 if minetest.get_modpath("bakedclay") then
 
-grp = {cracky = 3, not_in_craft_guide = 1}
+for i = 1, #colours, 1 do
 
-stairs.register_all("bakedclay_white", "bakedclay:white",
-	grp,
-	{"baked_clay_white.png"},
-	"Baked Clay White",
+stairs.register_all("bakedclay_" .. colours[i][1], "bakedclay:" .. colours[i][1],
+	{cracky = 3},
+	{"baked_clay_" .. colours[i][1] .. ".png"},
+	"Baked Clay " .. colours[i][2],
 	stairs.stone)
 
-stairs.register_all("bakedclay_grey", "bakedclay:grey",
-	grp,
-	{"baked_clay_grey.png"},
-	"Baked Clay Grey",
-	stairs.stone)
-
-stairs.register_all("bakedclay_black", "bakedclay:black",
-	grp,
-	{"baked_clay_black.png"},
-	"Baked Clay Black",
-	stairs.stone)
-
-stairs.register_all("bakedclay_red", "bakedclay:red",
-	grp,
-	{"baked_clay_red.png"},
-	"Baked Clay Red",
-	stairs.stone)
-
-stairs.register_all("bakedclay_yellow", "bakedclay:yellow",
-	grp,
-	{"baked_clay_yellow.png"},
-	"Baked Clay Yellow",
-	stairs.stone)
-
-stairs.register_all("bakedclay_green", "bakedclay:green",
-	grp,
-	{"baked_clay_green.png"},
-	"Baked Clay Green",
-	stairs.stone)
-
-stairs.register_all("bakedclay_cyan", "bakedclay:cyan",
-	grp,
-	{"baked_clay_cyan.png"},
-	"Baked Clay Cyan",
-	stairs.stone)
-
-stairs.register_all("bakedclay_blue", "bakedclay:blue",
-	grp,
-	{"baked_clay_blue.png"},
-	"Baked Clay Blue",
-	stairs.stone)
-
-stairs.register_all("bakedclay_magenta", "bakedclay:magenta",
-	grp,
-	{"baked_clay_magenta.png"},
-	"Baked Clay Magenta",
-	stairs.stone)
-
-stairs.register_all("bakedclay_orange", "bakedclay:orange",
-	grp,
-	{"baked_clay_orange.png"},
-	"Baked Clay Orange",
-	stairs.stone)
-
-stairs.register_all("bakedclay_violet", "bakedclay:violet",
-	grp,
-	{"baked_clay_violet.png"},
-	"Baked Clay Violet",
-	stairs.stone)
-
-stairs.register_all("bakedclay_brown", "bakedclay:brown",
-	grp,
-	{"baked_clay_brown.png"},
-	"Baked Clay Brown",
-	stairs.stone)
-
-stairs.register_all("bakedclay_pink", "bakedclay:pink",
-	grp,
-	{"baked_clay_pink.png"},
-	"Baked Clay Pink",
-	stairs.stone)
-
-stairs.register_all("bakedclay_dark_grey", "bakedclay:dark_grey",
-	grp,
-	{"baked_clay_dark_grey.png"},
-	"Baked Clay Dark Grey",
-	stairs.stone)
-
-stairs.register_all("bakedclay_dark_green", "bakedclay:dark_green",
-	grp,
-	{"baked_clay_dark_green.png"},
-	"Baked Clay Dark Green",
-	stairs.stone)
+end -- END for
 
 end
 
@@ -779,100 +703,15 @@ end
 
 if minetest.get_modpath("wool") then
 
-grp = {
-	snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3,
-	not_in_craft_guide = 1
-}
+for i = 1, #colours, 1 do
 
-stairs.register_all("wool_white", "wool:white",
-	grp,
-	{"wool_white.png"},
-	"White Wool",
-	stairs.wool)
+stairs.register_all("wool_" .. colours[i][1], "wool:" .. colours[i][1],
+	{snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3},
+	{"wool_" .. colours[i][1] .. ".png"},
+	colours[i][2] .. " Wool",
+	stairs.stone)
 
-stairs.register_all("wool_grey", "wool:grey",
-	grp,
-	{"wool_grey.png"},
-	"Grey Wool",
-	stairs.wool)
-
-stairs.register_all("wool_black", "wool:black",
-	grp,
-	{"wool_black.png"},
-	"Black Wool",
-	stairs.wool)
-
-stairs.register_all("wool_red", "wool:red",
-	grp,
-	{"wool_red.png"},
-	"Red Wool",
-	stairs.wool)
-
-stairs.register_all("wool_yellow", "wool:yellow",
-	grp,
-	{"wool_yellow.png"},
-	"Yellow Wool",
-	stairs.wool)
-
-stairs.register_all("wool_green", "wool:green",
-	grp,
-	{"wool_green.png"},
-	"Green Wool", 
-	stairs.wool)
-
-stairs.register_all("wool_cyan", "wool:cyan",
-	grp,
-	{"wool_cyan.png"},
-	"Cyan Wool", 
-	stairs.wool)
-
-stairs.register_all("wool_blue", "wool:blue",
-	grp,
-	{"wool_blue.png"},
-	"Blue Wool", 
-	stairs.wool)
-
-stairs.register_all("wool_magenta", "wool:magenta",
-	grp,
-	{"wool_magenta.png"},
-	"Magenta Wool", 
-	stairs.wool)
-
-stairs.register_all("wool_orange", "wool:orange",
-	grp,
-	{"wool_orange.png"},
-	"Orange Wool",
-	stairs.wool)
-
-stairs.register_all("wool_violet", "wool:violet",
-	grp,
-	{"wool_violet.png"},
-	"Violet Wool",
-	stairs.wool)
-
-stairs.register_all("wool_brown", "wool:brown",
-	grp,
-	{"wool_brown.png"},
-	"Brown Wool",
-	stairs.wool)
-
-stairs.register_all("wool_pink", "wool:pink",
-	grp,
-	{"wool_pink.png"},
-	"Pink Wool",
-	stairs.wool)
-
-stairs.register_all("wool_dark_grey", "wool:dark_grey",
-	grp,
-	{"wool_dark_grey.png"},
-	"Dark Grey Wool", 
-	stairs.wool)
-
-stairs.register_all("wool_dark_green", "wool:dark_green",
-	grp,
-	{"wool_dark_green.png"},
-	"Dark Green Wool", 
-	stairs.wool)
+end -- END for
 
 end
 
