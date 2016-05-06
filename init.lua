@@ -218,49 +218,49 @@ local grp = {}
 --= Default Minetest
 
 stairs.register_all("wood", "default:wood",
-	{choppy=2,oddly_breakable_by_hand=2,flammable=3},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_wood.png"},
 	"Wooden",
 	stairs.wood)
 
 stairs.register_all("junglewood", "default:junglewood",
-	{choppy=2,oddly_breakable_by_hand=2,flammable=3, not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_junglewood.png"},
 	"Jungle Wood",
 	stairs.wood)
 
 stairs.register_all("pine_wood", "default:pinewood",
-	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 1, flammable = 3},
 	{"default_pine_wood.png"},
 	"Pine Wood",
 	stairs.wood)
 
 stairs.register_all("acacia_wood", "default:acacia_wood",
-	{choppy=2,oddly_breakable_by_hand=1,flammable=3, not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 1, flammable = 3},
 	{"default_acacia_wood.png"},
 	"Acacia Wood",
 	stairs.wood)
 
 stairs.register_all("aspen_wood", "default:aspen_wood",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_aspen_wood.png"},
 	"Aspen Wood",
-	default.node_sound_wood_defaults())
+	stairs.wood)
 
 stairs.register_all("cobble", "default:cobble",
-	{cracky=3,stone=2},
+	{cracky = 3},
 	{"default_cobble.png"},
 	"Cobble",
 	stairs.stone)
 
 stairs.register_all("desert_cobble", "default:desert_cobble",
-	{cracky=3, stone=2, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_desert_cobble.png"},
 	"Desert Cobble", 
 	stairs.stone)
 
 stairs.register_stair("cloud", "default:cloud",
-	{unbreakable=1, not_in_craft_guide=1},
+	{unbreakable = 1},
 	{"default_cloud.png"},
 	"Cloud Stair",
 	stairs.wool)
@@ -270,7 +270,7 @@ minetest.override_item("stairs:stair_cloud", {
 })
 
 stairs.register_slab("cloud", "default:cloud",
-	{unbreakable=1, not_in_craft_guide=1},
+	{unbreakable = 1},
 	{"default_cloud.png"},
 	"Cloud Slab",
 	stairs.wool)
@@ -280,115 +280,115 @@ minetest.override_item("stairs:slab_cloud", {
 })
 
 stairs.register_all("coal", "default:coalblock",
-	{cracky=3, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_coal_block.png"},
 	"Coal",
 	stairs.stone)
 
 stairs.register_all("steelblock", "default:steelblock",
-	{cracky=1,level=2, not_in_craft_guide=1},
+	{cracky = 1, level = 2},
 	{"default_steel_block.png"},
 	"Steel",
 	stairs.stone)
 
 stairs.register_all("copperblock", "default:copperblock",
-	{cracky=1,level=2, not_in_craft_guide=1},
+	{cracky = 1, level = 2},
 	{"default_copper_block.png"},
 	"Copper",
 	stairs.stone)
 
 stairs.register_all("bronzeblock", "default:bronzeblock",
-	{cracky=1,level=2, not_in_craft_guide=1},
+	{cracky = 1, level = 2},
 	{"default_bronze_block.png"},
 	"Bronze",
 	stairs.stone)
 
 stairs.register_all("mese", "default:mese",
-	{cracky=1,level=2, not_in_craft_guide=1},
+	{cracky = 1, level = 2},
 	{"default_mese_block.png"},
 	"Mese",
 	stairs.stone)
 
 stairs.register_all("goldblock", "default:goldblock",
-	{cracky=1, not_in_craft_guide=1},
+	{cracky = 1},
 	{"default_gold_block.png"},
 	"Gold",
 	stairs.stone)
 
 stairs.register_all("diamondblock", "default:diamondblock",
-	{cracky=1,level=3, not_in_craft_guide=1},
+	{cracky = 1, level = 3},
 	{"default_diamond_block.png"},
 	"Diamond",
 	stairs.stone)
 
 stairs.register_all("stone", "default:stone",
-	{cracky=3,stone=1, not_in_craft_guide=1},
+	{cracky=3,stone=1, },
 	{"default_stone.png"},
 	"Stone",
 	stairs.stone)
 
 stairs.register_all("desert_stone", "default:desert_stone",
-	{cracky=3,stone=1, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_desert_stone.png"},
 	"Desert Stone",
 	stairs.stone)
 
 stairs.register_all("mossycobble", "default:mossycobble",
-	{cracky=3, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_mossycobble.png"},
 	"Mossy Cobble",
 	stairs.stone)
 
 stairs.register_all("brick", "default:brick",
-	{cracky=3, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_brick.png"},
 	"Brick",
 	stairs.stone)
 
 stairs.register_all("sandstone", "default:sandstone",
-	{crumbly=2,cracky=3, not_in_craft_guide=1},
+	{crumbly = 1, cracky = 3},
 	{"default_sandstone.png"},
 	"Sandstone",
 	stairs.stone)
 
 stairs.register_all("glass", "default:glass",
-	{cracky=3,oddly_breakable_by_hand=3, not_in_craft_guide=1},
+	{cracky = 3, oddly_breakable_by_hand = 3},
 	{"default_glass.png"},
 	"Glass",
 	stairs.glass)
 
 stairs.register_all("obsidian_glass", "default:obsidian_glass",
-	{cracky=2,level=3, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_obsidian_glass.png"},
 	"Obsidian Glass",
 	stairs.glass)
 
 stairs.register_all("sandstonebrick", "default:sandstonebrick",
-	{cracky=2, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_sandstone_brick.png"},
 	"Sandstone Brick",
 	stairs.stone)
 
 stairs.register_all("obsidian", "default:obsidian",
-	{cracky=1,level=2, unbreakable=1, not_in_craft_guide=1},
+	{cracky = 1, level = 2},
 	{"default_obsidian.png"},
 	"Obsidian",
 	stairs.stone)
 
 stairs.register_all("stonebrick", "default:stonebrick",
-	{cracky=2,stone=1, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_stone_brick.png"},
 	"Stone Brick",
 	stairs.stone)
 
 stairs.register_all("desert_stonebrick", "default:desert_stonebrick",
-	{cracky = 3, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_desert_stone_brick.png"},
 	"Desert Stone Brick",
 	stairs.stone)
 
 stairs.register_all("obsidianbrick", "default:obsidianbrick",
-	{cracky=1,level=3, unbreakable=1, not_in_craft_guide=1},
+	{cracky = 1, level = 3},
 	{"default_obsidian_brick.png"},
 	"Obsidian Brick",
 	stairs.stone)
@@ -419,7 +419,7 @@ for i = 1, #colours, 1 do
 -- wood stair
 
 stairs.register_all(colours[i][1] .. "_wood", "cblocks:wood_" .. colours[i][1],
-	{choppy=2,oddly_breakable_by_hand=2,flammable=3, not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_wood.png^[colorize:" .. colours[i][3]},
 	colours[i][2] .. " Wooden",
 	stairs.wood)
@@ -431,20 +431,22 @@ end
 --= More Ores Mod
 if minetest.get_modpath("moreores") then
 
+grp = {cracky = 1, level = 2}
+
 stairs.register_all("tin_block", "moreores:tin_block",
-	{cracky=1,level=2, not_in_craft_guide=1},
+	grp,
 	{"moreores_tin_block.png"},
 	"Tin",
 	stairs.stone)
 
 stairs.register_all("silver_block", "moreores:silver_block",
-	{cracky=1,level=2, not_in_craft_guide=1},
+	grp,
 	{"moreores_silver_block.png"},
 	"Silver",
 	stairs.stone)
 
 stairs.register_all("mithril_block", "moreores:mithril_block",
-	{cracky=1,level=2, not_in_craft_guide=1},
+	grp,
 	{"moreores_mithril_block.png"},
 	"Mithril",
 	stairs.stone)
@@ -455,7 +457,7 @@ end
 if minetest.get_modpath("farming") then
 
 stairs.register_all("straw", "farming:straw",
-	{snappy = 3, flammable = 4, not_in_craft_guide = 1},
+	{snappy = 3, flammable = 4},
 	{"farming_straw.png"},
 	"Straw",
 	stairs.leaves)
@@ -466,7 +468,7 @@ end
 
 if mobs and mobs.mod and mobs.mod == "redo" then
 
-grp = {crumbly = 3, flammable = 2, not_in_craft_guide = 1}
+grp = {crumbly = 3, flammable = 2}
 
 stairs.register_all("cheeseblock", "mobs:cheeseblock",
 	grp,
@@ -486,7 +488,7 @@ end
 
 if minetest.get_modpath("lapis") then
 
-grp = {cracky = 3, not_in_craft_guide = 1}
+grp = {cracky = 3}
 
 stairs.register_all("lapis_block", "lapis:lapis_block",
 	grp,
@@ -538,7 +540,7 @@ end
 
 if minetest.get_modpath("xanadu") then
 
-grp = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, not_in_craft_guide = 1}
+grp = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3}
 
 stairs.register_all("stained_wood_white", "xanadu:stained_wood_white",
 	grp,
@@ -554,7 +556,7 @@ stairs.register_all("stained_wood_red", "xanadu:stained_wood_red",
 
 -- Decorative blocks
 
-grp = {cracky = 3, not_in_craft_guide = 1}
+grp = {cracky = 3}
 
 stairs.register_all("stone1", "xanadu:stone1",
 	grp,
@@ -651,12 +653,6 @@ stairs.register_all("bred2", "xanadu:red2",
 	"Decorative baked red clay 2",
 	stairs.stone)
 
-stairs.register_slab("glass2", "xanadu:glass2",
-	{cracky = 2, level = 3, not_in_craft_guide = 1},
-	{"glass2.png"},
-	"Decorative Invisible Glass",
-	stairs.glass)
-
 end
 
 --= Baked Clay mod
@@ -679,20 +675,22 @@ end
 
 if minetest.get_modpath("castle") then
 
+grp = {cracky = 2}
+
 --stairs.register_all("pavement", "castle:pavement",
---	{cracky=2, not_in_craft_guide=1},
+--	grp,
 --	{"castle_pavement_brick.png"},
 --	"Paving",
 --	stairs.stone)
 
 stairs.register_all("dungeon_stone", "castle:dungeon_stone",
-	{cracky=2, not_in_craft_guide=1},
+	grp,
 	{"castle_dungeon_stone.png"},
 	"Dungeon",
 	stairs.stone)
 
 stairs.register_all("stonewall", "castle:stonewall",
-	{cracky=3, not_in_craft_guide=1},
+	grp,
 	{"castle_stonewall.png"},
 	"Castle Wall",
 	stairs.stone)
