@@ -59,12 +59,21 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 		on_place = minetest.rotate_node
 	})
 
-	-- stair recipe
+	-- stair recipes
 	minetest.register_craft({
 		output = 'stairs:stair_' .. subname .. ' 4', -- was 6
 		recipe = {
 			{recipeitem, "", ""},
 			{recipeitem, recipeitem, ""},
+			{recipeitem, recipeitem, recipeitem},
+		},
+	})
+
+	minetest.register_craft({
+		output = 'stairs:stair_' .. subname .. ' 4', -- was 6
+		recipe = {
+			{"", "", recipeitem},
+			{"", recipeitem, recipeitem},
 			{recipeitem, recipeitem, recipeitem},
 		},
 	})
