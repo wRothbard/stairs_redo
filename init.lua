@@ -21,7 +21,7 @@ stairs.wool = default.node_sound_wool_defaults() -- Xanadu only
 --stairs.wool = stairs.leaves
 
 -- Node will be called stairs:stair_<subname>
-function stairs.register_stair(subname, recipeitem, groups, images, description, snds)
+function stairs.register_stair(subname, recipeitem, groups, images, description, snds, alpha)
 	groups.stair = 1
 	minetest.register_node(":stairs:stair_" .. subname, {
 		description = description,
@@ -32,6 +32,7 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
+		use_texture_alpha = alpha,
 		groups = groups,
 		sounds = snds,
 --		node_box = {
@@ -78,7 +79,7 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 end
 
 -- Node will be called stairs:slab_<subname>
-function stairs.register_slab(subname, recipeitem, groups, images, description, snds)
+function stairs.register_slab(subname, recipeitem, groups, images, description, snds, alpha)
 	groups.slab = 1
 	minetest.register_node(":stairs:slab_" .. subname, {
 		description = description,
@@ -87,6 +88,7 @@ function stairs.register_slab(subname, recipeitem, groups, images, description, 
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
+		use_texture_alpha = alpha,
 		groups = groups,
 		sounds = snds,
 		node_box = {
@@ -113,7 +115,7 @@ function stairs.register_slab(subname, recipeitem, groups, images, description, 
 end
 
 -- Node will be called stairs:corner_<subname>
-function stairs.register_corner(subname, recipeitem, groups, images, description, snds)
+function stairs.register_corner(subname, recipeitem, groups, images, description, snds, alpha)
 	minetest.register_node(":stairs:corner_" .. subname, {
 		description = description,
 		drawtype = "nodebox",
@@ -121,6 +123,7 @@ function stairs.register_corner(subname, recipeitem, groups, images, description
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
+		use_texture_alpha = alpha,
 		groups = groups,
 		sounds = snds,
 		node_box = {
@@ -152,7 +155,7 @@ function stairs.register_corner(subname, recipeitem, groups, images, description
 end
 
 -- Node will be called stairs:invcorner_<subname>
-function stairs.register_invcorner(subname, recipeitem, groups, images, description, snds)
+function stairs.register_invcorner(subname, recipeitem, groups, images, description, snds, alpha)
 	minetest.register_node(":stairs:invcorner_" .. subname, {
 		description = description,
 		drawtype = "nodebox",
@@ -160,6 +163,7 @@ function stairs.register_invcorner(subname, recipeitem, groups, images, descript
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
+		use_texture_alpha = alpha,
 		groups = groups,
 		sounds = snds,
 		node_box = {
@@ -194,21 +198,21 @@ end
 
 -- Nodes will be called stairs:{stair,slab}_<subname>
 function stairs.register_stair_and_slab(subname, recipeitem, groups, images,
-		desc_stair, desc_slab, sounds)
-	stairs.register_stair(subname, recipeitem, groups, images, desc_stair, sounds)
-	stairs.register_slab(subname, recipeitem, groups, images, desc_slab, sounds)
+		desc_stair, desc_slab, sounds, alpha)
+	stairs.register_stair(subname, recipeitem, groups, images, desc_stair, sounds, alpha)
+	stairs.register_slab(subname, recipeitem, groups, images, desc_slab, sounds, alpha)
 end
 
 -- Nodes will be called stairs:{stair,slab,corner,invcorner}_<subname>
-function stairs.register_all(subname, recipeitem, groups, images, desc, snds)
+function stairs.register_all(subname, recipeitem, groups, images, desc, snds, alpha)
 	local str = " Stair"
-	stairs.register_stair(subname, recipeitem, groups, images, str .. desc, snds)
+	stairs.register_stair(subname, recipeitem, groups, images, str .. desc, snds, alpha)
 	str = " Slab"
-	stairs.register_slab(subname, recipeitem, groups, images, str .. desc, snds)
+	stairs.register_slab(subname, recipeitem, groups, images, str .. desc, snds, alpha)
 	str = " Corner"
-	stairs.register_corner(subname, recipeitem, groups, images, str .. desc, snds)
+	stairs.register_corner(subname, recipeitem, groups, images, str .. desc, snds, alpha)
 	str = " Inverted Corner"
-	stairs.register_invcorner(subname, recipeitem, groups, images, str .. desc, snds)
+	stairs.register_invcorner(subname, recipeitem, groups, images, str .. desc, snds, alpha)
 end
 
 -- Helper
@@ -423,6 +427,12 @@ stairs.register_all(colours[i][1] .. "_wood", "cblocks:wood_" .. colours[i][1],
 	{"default_wood.png^[colorize:" .. colours[i][3]},
 	colours[i][2] .. " Wooden",
 	stairs.wood)
+
+stairs.register_all(colours[i][1] .. "_glass", "cblocks:glass_" .. colours[i][1],
+	{cracky = 3, oddly_breakable_by_hand = 3},
+	{"cblocks.png^[colorize:" .. colours[i][3]},
+	colours[i][2] .. " Glass",
+	stairs.glass, true)
 
 end --for
 
