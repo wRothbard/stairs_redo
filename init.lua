@@ -205,6 +205,55 @@ function stairs.register_invcorner(subname, recipeitem, groups, images, descript
 	})
 end
 
+-- Node will be called stairs:slope_<subname>
+function stairs.register_slope(subname, recipeitem, groups, images, description, snds, alpha)
+	groups.slab = 1
+	minetest.register_node(":stairs:slope_" .. subname, {
+		description = description,
+		--drawtype = "nodebox",
+		drawtype = "mesh",
+		mesh = "stairs_slope.obj",
+		tiles = images,
+		paramtype = "light",
+		paramtype2 = "facedir",
+		is_ground_content = false,
+		use_texture_alpha = alpha,
+		groups = groups,
+		sounds = snds,
+		selection_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+				{-0.5, 0, 0, 0.5, 0.5, 0.5},
+			},
+		},
+		collision_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+				{-0.5, 0, 0, 0.5, 0.5, 0.5},
+			},
+		},
+		on_place = minetest.rotate_node
+	})
+
+	-- slope recipe
+	minetest.register_craft({
+		output = 'stairs:slope_' .. subname .. ' 6',
+		recipe = {
+			{recipeitem, "", ""},
+			{recipeitem, recipeitem, ""},
+		},
+	})
+
+	-- slope to original material recipe
+	minetest.register_craft({
+		type = "shapeless",
+		output = recipeitem,
+		recipe = {"stairs:slope_" .. subname, "stairs:slope_" .. subname}
+	})
+end
+
 -- Nodes will be called stairs:{stair,slab}_<subname>
 function stairs.register_stair_and_slab(subname, recipeitem, groups, images,
 		desc_stair, desc_slab, sounds, alpha)
@@ -222,6 +271,8 @@ function stairs.register_all(subname, recipeitem, groups, images, desc, snds, al
 	stairs.register_corner(subname, recipeitem, groups, images, str .. desc, snds, alpha)
 	str = " Inverted Corner"
 	stairs.register_invcorner(subname, recipeitem, groups, images, str .. desc, snds, alpha)
+	str = " Slope"
+	stairs.register_slope(subname, recipeitem, groups, images, str .. desc, snds, alpha)
 end
 
 -- Helper
