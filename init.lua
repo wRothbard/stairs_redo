@@ -734,7 +734,7 @@ for i = 1, #colours, 1 do
 stairs.register_all("bakedclay_" .. colours[i][1], "bakedclay:" .. colours[i][1],
 	{cracky = 3},
 	{"baked_clay_" .. colours[i][1] .. ".png"},
-	"Baked Clay " .. colours[i][2],
+	colours[i][2] .. " Baked Clay",
 	stairs.stone)
 
 end -- END for
