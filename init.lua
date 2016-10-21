@@ -264,15 +264,15 @@ end
 -- Nodes will be called stairs:{stair,slab,corner,invcorner}_<subname>
 function stairs.register_all(subname, recipeitem, groups, images, desc, snds, alpha)
 	local str = " Stair"
-	stairs.register_stair(subname, recipeitem, groups, images, str .. desc, snds, alpha)
+	stairs.register_stair(subname, recipeitem, groups, images, desc .. str, snds, alpha)
 	str = " Slab"
-	stairs.register_slab(subname, recipeitem, groups, images, str .. desc, snds, alpha)
+	stairs.register_slab(subname, recipeitem, groups, images, desc .. str, snds, alpha)
 	str = " Corner"
-	stairs.register_corner(subname, recipeitem, groups, images, str .. desc, snds, alpha)
+	stairs.register_corner(subname, recipeitem, groups, images, desc .. str, snds, alpha)
 	str = " Inverted Corner"
-	stairs.register_invcorner(subname, recipeitem, groups, images, str .. desc, snds, alpha)
+	stairs.register_invcorner(subname, recipeitem, groups, images, desc .. str, snds, alpha)
 	str = " Slope"
-	stairs.register_slope(subname, recipeitem, groups, images, str .. desc, snds, alpha)
+	stairs.register_slope(subname, recipeitem, groups, images, desc .. str, snds, alpha)
 end
 
 -- Helper
