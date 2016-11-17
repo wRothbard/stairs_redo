@@ -673,48 +673,49 @@ stairs.register_all("sandstonebrick4", "xanadu:sandstonebrick4",
 stairs.register_slab("desert_cobble1", "xanadu:desert_cobble1",
 	grp,
 	{"desert_cobble1.png"},
-	"Decorative desert cobble 1",
+	"Decorative desert cobble 1 slab",
 	stairs.stone)
 
 stairs.register_slab("desert_cobble5", "xanadu:desert_cobble5",
 	grp,
 	{"desert_cobble5.png"},
-	"Decorative desert cobble 5",
+	"Decorative desert cobble 5 slab",
 	stairs.stone)
 
 stairs.register_slab("desert_stone1", "xanadu:desert_stone1",
 	grp,
 	{"desert_stone1.png"},
-	"Decorative desert stone 1",
+	"Decorative desert stone 1 slab",
 	stairs.stone)
 
 stairs.register_slab("desert_stone3", "xanadu:desert_stone3",
 	grp,
 	{"desert_stone3.png"},
-	"Decorative desert stone 3",
+	"Decorative desert stone 3 slab",
 	stairs.stone)
 
 stairs.register_slab("desert_stone4", "xanadu:desert_stone4",
 	grp,
 	{"desert_stone4.png"},
-	"Decorative desert stone 4",
+	"Decorative desert stone 4 slab",
 	stairs.stone)
+
 stairs.register_stair("desert_stone4", "xanadu:desert_stone4",
 	grp,
 	{"desert_stone4.png"},
-	"Decorative desert stone 4",
+	"Decorative desert stone 4 stair",
 	stairs.stone)
 
 stairs.register_slab("desert_stone5", "xanadu:desert_stone5",
 	grp,
 	{"desert_stone5.png"},
-	"Decorative desert stone 5",
+	"Decorative desert stone 5 slab",
 	stairs.stone)
 
 stairs.register_slab("red1", "xanadu:red1",
 	grp,
 	{"baked_clay_red1.png"},
-	"Decorative baked red clay 1",
+	"Decorative baked red clay 1 slab",
 	stairs.stone)
 
 stairs.register_all("bred2", "xanadu:red2",
