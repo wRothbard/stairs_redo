@@ -324,7 +324,7 @@ stairs.register_all("desert_cobble", "default:desert_cobble",
 	stairs.stone)
 
 stairs.register_stair("cloud", "default:cloud",
-	{unbreakable = 1},
+	{unbreakable = 1, not_in_creative_inventory = 1},
 	{"default_cloud.png"},
 	"Cloud Stair",
 	stairs.wool)
@@ -334,7 +334,7 @@ minetest.override_item("stairs:stair_cloud", {
 })
 
 stairs.register_slab("cloud", "default:cloud",
-	{unbreakable = 1},
+	{unbreakable = 1, not_in_creative_inventory = 1},
 	{"default_cloud.png"},
 	"Cloud Slab",
 	stairs.wool)
