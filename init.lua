@@ -20,6 +20,10 @@ stairs.leaves = default.node_sound_leaves_defaults()
 stairs.wool = default.node_sound_wool_defaults() -- Xanadu only
 --stairs.wool = stairs.leaves
 
+-- Don't break on 0.4.14 and earlier.
+stairs.metal = (default.node_sound_metal_defaults
+and default.node_sound_metal_defaults() or stairs.stone)
+
 -- Node will be called stairs:stair_<subname>
 function stairs.register_stair(subname, recipeitem, groups, images, description, snds, alpha)
 	groups.stair = 1
@@ -353,19 +357,19 @@ stairs.register_all("steelblock", "default:steelblock",
 	{cracky = 1, level = 2},
 	{"default_steel_block.png"},
 	"Steel",
-	stairs.stone)
+	stairs.metal)
 
 stairs.register_all("copperblock", "default:copperblock",
 	{cracky = 1, level = 2},
 	{"default_copper_block.png"},
 	"Copper",
-	stairs.stone)
+	stairs.metal)
 
 stairs.register_all("bronzeblock", "default:bronzeblock",
 	{cracky = 1, level = 2},
 	{"default_bronze_block.png"},
 	"Bronze",
-	stairs.stone)
+	stairs.metal)
 
 stairs.register_all("mese", "default:mese",
 	{cracky = 1, level = 2},
@@ -377,7 +381,7 @@ stairs.register_all("goldblock", "default:goldblock",
 	{cracky = 1},
 	{"default_gold_block.png"},
 	"Gold",
-	stairs.stone)
+	stairs.metal)
 
 stairs.register_all("diamondblock", "default:diamondblock",
 	{cracky = 1, level = 3},
@@ -507,19 +511,19 @@ stairs.register_all("tin_block", "moreores:tin_block",
 	grp,
 	{"moreores_tin_block.png"},
 	"Tin",
-	stairs.stone)
+	stairs.metal)
 
 stairs.register_all("silver_block", "moreores:silver_block",
 	grp,
 	{"moreores_silver_block.png"},
 	"Silver",
-	stairs.stone)
+	stairs.metal)
 
 stairs.register_all("mithril_block", "moreores:mithril_block",
 	grp,
 	{"moreores_mithril_block.png"},
 	"Mithril",
-	stairs.stone)
+	stairs.metal)
 
 end
 
@@ -778,7 +782,7 @@ stairs.register_all("wool_" .. colours[i][1], "wool:" .. colours[i][1],
 	{snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3},
 	{"wool_" .. colours[i][1] .. ".png"},
 	colours[i][2] .. " Wool",
-	stairs.stone)
+	stairs.wool)
 
 end -- END for
 
