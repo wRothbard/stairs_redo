@@ -24,6 +24,24 @@ stairs.wool = default.node_sound_wool_defaults() -- Xanadu only
 stairs.metal = (default.node_sound_metal_defaults
 and default.node_sound_metal_defaults() or stairs.stone)
 
+-- cache creative
+local creative = minetest.setting_getbool("creative_mode")
+function is_creative_enabled_for(name)
+	if creative or minetest.check_player_privs(name, {creative = true}) then
+		return true
+	end
+	return false
+end
+
+-- stair rotation
+local rotate_node = function(itemstack, placer, pointed_thing)
+	core.rotate_and_place(itemstack, placer, pointed_thing,
+			is_creative_enabled_for(placer:get_player_name()),
+			{invert_wall = placer:get_player_control().sneak})
+
+	return itemstack
+end
+
 -- Node will be called stairs:stair_<subname>
 function stairs.register_stair(subname, recipeitem, groups, images, description, snds, alpha)
 	groups.stair = 1
@@ -60,7 +78,8 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 				{-0.5, 0, 0, 0.5, 0.5, 0.5},
 			},
 		},
-		on_place = minetest.rotate_node
+		--on_place = minetest.rotate_node
+		on_place = rotate_node
 	})
 
 	-- stair recipes
@@ -108,7 +127,8 @@ function stairs.register_slab(subname, recipeitem, groups, images, description, 
 			type = "fixed",
 			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
 		},
-		on_place = minetest.rotate_node
+		--on_place = minetest.rotate_node
+		on_place = rotate_node
 	})
 
 	-- slab recipe
@@ -146,7 +166,8 @@ function stairs.register_corner(subname, recipeitem, groups, images, description
 				{-0.5, 0, 0, 0, 0.5, 0.5},
 			},
 		},
-		on_place = minetest.rotate_node
+		--on_place = minetest.rotate_node
+		on_place = rotate_node
 	})
 
 	-- corner stair recipe
@@ -187,7 +208,8 @@ function stairs.register_invcorner(subname, recipeitem, groups, images, descript
 				{-0.5, 0, -0.5, 0, 0.5, 0},
 			},
 		},
-		on_place = minetest.rotate_node
+		--on_place = minetest.rotate_node
+		on_place = rotate_node
 	})
 
 	-- inside corner stair recipe
@@ -238,7 +260,8 @@ function stairs.register_slope(subname, recipeitem, groups, images, description,
 				{-0.5, 0, 0, 0.5, 0.5, 0.5},
 			},
 		},
-		on_place = minetest.rotate_node
+		--on_place = minetest.rotate_node
+		on_place = rotate_node
 	})
 
 	-- slope recipe
