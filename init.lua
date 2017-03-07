@@ -436,12 +436,6 @@ stairs.register_all("brick", "default:brick",
 	"Brick",
 	stairs.stone)
 
-stairs.register_all("sandstone", "default:sandstone",
-	{crumbly = 1, cracky = 3},
-	{"default_sandstone.png"},
-	"Sandstone",
-	stairs.stone)
-
 stairs.register_all("glass", "default:glass",
 	{cracky = 3, oddly_breakable_by_hand = 3},
 	{"default_glass.png"},
@@ -466,12 +460,6 @@ stairs.register_all("obsidian", "default:obsidian",
 	"Obsidian",
 	stairs.stone)
 
-stairs.register_all("stonebrick", "default:stonebrick",
-	{cracky = 2},
-	{"default_stone_brick.png"},
-	"Stone Brick",
-	stairs.stone)
-
 stairs.register_all("desert_stonebrick", "default:desert_stonebrick",
 	{cracky = 3},
 	{"default_desert_stone_brick.png"},
@@ -482,6 +470,63 @@ stairs.register_all("obsidianbrick", "default:obsidianbrick",
 	{cracky = 1, level = 3},
 	{"default_obsidian_brick.png"},
 	"Obsidian Brick",
+	stairs.stone)
+
+-- sandstone nodes
+stairs.register_all("sandstone", "default:sandstone",
+	{crumbly = 1, cracky = 3},
+	{"default_sandstone.png"},
+	"Sandstone",
+	stairs.stone)
+
+stairs.register_all("stonebrick", "default:stonebrick",
+	{cracky = 2},
+	{"default_stone_brick.png"},
+	"Stone Brick",
+	stairs.stone)
+
+stairs.register_all("sandstone_block", "default:sandstone_block",
+	{cracky = 2},
+	{"default_sandstone_block.png"},
+	"Sandstone Block",
+	stairs.stone)
+
+
+-- add stairs for new sandstone nodes (desert and silver)
+stairs.register_all("desert_sandstone", "default:desert_sandstone",
+	{crumbly = 1, cracky = 3},
+	{"default_desert_sandstone.png"},
+	"Desert Sandstone",
+	stairs.stone)
+
+stairs.register_all("desert_sandstone_brick", "default:desert_sandstone_brick",
+	{cracky = 2},
+	{"default_desert_sandstone_brick.png"},
+	"Desert Sandstone Brick",
+	stairs.stone)
+
+stairs.register_all("desert_sandstone_block", "default:desert_sandstone_block",
+	{cracky = 2},
+	{"default_desert_sandstone_block.png"},
+	"Desert Sandstone Block",
+	stairs.stone)
+
+stairs.register_all("silver_sandstone", "default:silver_sandstone",
+	{crumbly = 1, cracky = 3},
+	{"default_silver_sandstone.png"},
+	"Silver Sandstone",
+	stairs.stone)
+
+stairs.register_all("silver_sandstone_brick", "default:silver_sandstone_brick",
+	{cracky = 2},
+	{"default_silver_sandstone_brick.png"},
+	"Silver Sandstone Brick",
+	stairs.stone)
+
+stairs.register_all("silver_sandstone_block", "default:silver_sandstone_block",
+	{cracky = 2},
+	{"default_silver_sandstone_block.png"},
+	"Silver Sandstone Block",
 	stairs.stone)
 
 local colours = {
