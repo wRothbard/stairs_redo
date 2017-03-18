@@ -550,21 +550,26 @@ local colours = {
 --= Coloured Blocks Mod
 if minetest.get_modpath("cblocks") then
 
+local col
+
 for i = 1, #colours, 1 do
 
--- wood stair
-
-stairs.register_all(colours[i][1] .. "_wood", "cblocks:wood_" .. colours[i][1],
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
-	{"default_wood.png^[colorize:" .. colours[i][3]},
-	colours[i][2] .. " Wooden",
-	stairs.wood)
+col = colours[i][1]
 
 stairs.register_all(colours[i][1] .. "_glass", "cblocks:glass_" .. colours[i][1],
 	{cracky = 3, oddly_breakable_by_hand = 3},
 	{"cblocks.png^[colorize:" .. colours[i][3]},
 	colours[i][2] .. " Glass",
 	stairs.glass, true)
+
+if col == "yellow" then col = "yellow2" end -- fixes ethereal yellow wood and cblocks yellow wood mixup
+
+stairs.register_all(col .. "_wood", "cblocks:wood_" .. colours[i][1],
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+	{"default_wood.png^[colorize:" .. colours[i][3]},
+	colours[i][2] .. " Wooden",
+	stairs.wood)
+
 
 end --for
 
