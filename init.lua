@@ -305,7 +305,7 @@ end
 -- Helper
 
 local grp = {}
-
+--local x = os.clock()
 --= Default Minetest
 
 stairs.register_all("wood", "default:wood",
@@ -464,6 +464,12 @@ stairs.register_all("desert_stonebrick", "default:desert_stonebrick",
 	{cracky = 3},
 	{"default_desert_stone_brick.png"},
 	"Desert Stone Brick",
+	stairs.stone)
+
+stairs.register_all("desert_stone_block", "default:desert_stone_block",
+	{cracky = 2},
+	{"default_desert_stone_block.png"},
+	"Desert Stone Block",
 	stairs.stone)
 
 stairs.register_all("obsidianbrick", "default:obsidianbrick",
@@ -860,5 +866,5 @@ stairs.register_all("wool_" .. colours[i][1], "wool:" .. colours[i][1],
 end -- END for
 
 end
-
+--print(string.format("elapsed time: %.4f\n", os.clock() - x))
 print ("[MOD] Stairs Redo loaded")
