@@ -84,7 +84,7 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 
 	-- stair recipes
 	minetest.register_craft({
-		output = 'stairs:stair_' .. subname .. ' 4', -- was 6
+		output = 'stairs:stair_' .. subname .. ' 8',
 		recipe = {
 			{recipeitem, "", ""},
 			{recipeitem, recipeitem, ""},
@@ -93,7 +93,7 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 	})
 
 	minetest.register_craft({
-		output = 'stairs:stair_' .. subname .. ' 4', -- was 6
+		output = 'stairs:stair_' .. subname .. ' 8',
 		recipe = {
 			{"", "", recipeitem},
 			{"", recipeitem, recipeitem},
@@ -103,9 +103,11 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 
 	-- stair to original material recipe
 	minetest.register_craft({
-		type = "shapeless",
 		output = recipeitem .. " 3",
-		recipe = {"stairs:stair_" .. subname, "stairs:stair_" .. subname}
+		recipe = {
+			{"stairs:stair_" .. subname, "stairs:stair_" .. subname},
+			{"stairs:stair_" .. subname, "stairs:stair_" .. subname},
+		},
 	})
 
 end
@@ -172,7 +174,7 @@ function stairs.register_corner(subname, recipeitem, groups, images, description
 
 	-- corner stair recipe
 	minetest.register_craft({
-		output = 'stairs:corner_' .. subname .. ' 4',
+		output = 'stairs:corner_' .. subname .. ' 6',
 		recipe = {
 			{"", "", ""},
 			{"", recipeitem, ""},
@@ -183,8 +185,8 @@ function stairs.register_corner(subname, recipeitem, groups, images, description
 	-- corner stair to original material recipe
 	minetest.register_craft({
 		type = "shapeless",
-		output = recipeitem,
-		recipe = {"stairs:corner_" .. subname, "stairs:corner_" .. subname}
+		output = recipeitem .. " 2",
+		recipe = {"stairs:corner_" .. subname, "stairs:corner_" .. subname, "stairs:corner_" .. subname}
 	})
 end
 
