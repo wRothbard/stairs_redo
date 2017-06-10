@@ -868,5 +868,28 @@ stairs.register_all("wool_" .. colours[i][1], "wool:" .. colours[i][1],
 end -- END for
 
 end
+
+--= Caverealms mod
+if minetest.get_modpath("caverealms") then
+
+stairs.register_all("hot_cobble", "caverealms:hot_cobble",
+	{cracky = 3},
+	{"caverealms_hot_cobble.png"},
+	"Hot Cobble",
+	stairs.stone)
+
+stairs.register_all("glow_obsidian-brick", "caverealms:glow_obsidian_brick",
+	{cracky = 1, level = 3},
+	{"caverealms_glow_obsidian_brick.png"},
+	"Glow Obsidian Brick",
+	stairs.stone)
+
+stairs.register_all("glow_obsidian_brick_2", "caverealms:glow_obsidian_brick_2",
+	{cracky = 1, level = 3},
+	{"caverealms_glow_obsidian_brick_2.png"},
+	"Glow Obsidian Brick 2",
+	stairs.stone)
+
+end
 --print(string.format("elapsed time: %.4f\n", os.clock() - x))
 print ("[MOD] Stairs Redo loaded")
