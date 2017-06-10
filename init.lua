@@ -306,6 +306,8 @@ end
 
 -- Helper
 
+minetest.after(0, function()
+
 local grp = {}
 --local x = os.clock()
 --= Default Minetest
@@ -869,8 +871,9 @@ end -- END for
 
 end
 
---= Caverealms mod
-if minetest.get_modpath("caverealms") then
+--= Caverealms lite mod
+if minetest.get_modpath("caverealms")
+and minetest.registered_nodes["caverealms:glow_obsidian_brick"] then
 
 stairs.register_all("hot_cobble", "caverealms:hot_cobble",
 	{cracky = 3},
@@ -878,7 +881,7 @@ stairs.register_all("hot_cobble", "caverealms:hot_cobble",
 	"Hot Cobble",
 	stairs.stone)
 
-stairs.register_all("glow_obsidian-brick", "caverealms:glow_obsidian_brick",
+stairs.register_all("glow_obsidian_brick", "caverealms:glow_obsidian_brick",
 	{cracky = 1, level = 3},
 	{"caverealms_glow_obsidian_brick.png"},
 	"Glow Obsidian Brick",
@@ -889,7 +892,9 @@ stairs.register_all("glow_obsidian_brick_2", "caverealms:glow_obsidian_brick_2",
 	{"caverealms_glow_obsidian_brick_2.png"},
 	"Glow Obsidian Brick 2",
 	stairs.stone)
-
 end
+
+end) -- minetest.after
+
 --print(string.format("elapsed time: %.4f\n", os.clock() - x))
 print ("[MOD] Stairs Redo loaded")
