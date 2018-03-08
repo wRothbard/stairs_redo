@@ -673,6 +673,14 @@ stairs.register_all("straw", "farming:straw",
 	"Straw",
 	stairs.leaves)
 
+if minetest.registered_nodes["farming:hemp_block"] then
+stairs.register_all("hemp_block", "farming:hemp_block",
+	{snappy = 1, flammable = 2},
+	{"farming_hemp_block.png"},
+	"Hemp Block",
+	stairs.leaves)
+end
+
 end
 
 --= Mobs Mod
