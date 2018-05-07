@@ -44,8 +44,8 @@ local rotate_node = function(itemstack, placer, pointed_thing)
 	return itemstack
 end
 
--- Node will be called stairs:stair_<subname>
-function stairs.register_stair(subname, recipeitem, groups, images, description, snds, alpha)
+-- process textures
+local set_textures = function(images)
 	local stair_images = {}
 	for i, image in ipairs(images) do
 		if type(image) == "string" then
@@ -63,6 +63,12 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 			end
 		end
 	end
+	return stair_images
+end
+
+-- Node will be called stairs:stair_<subname>
+function stairs.register_stair(subname, recipeitem, groups, images, description, snds, alpha)
+	local stair_images = set_textures(images)
 	local new_groups = table.copy(groups)
 	new_groups.stair = 1
 	minetest.register_node(":stairs:stair_" .. subname, {
@@ -112,21 +118,7 @@ end
 
 -- Node will be called stairs:slab_<subname>
 function stairs.register_slab(subname, recipeitem, groups, images, description, snds, alpha)
-	-- Set world-aligned textures
-	local slab_images = {}
-	for i, image in ipairs(images) do
-		if type(image) == "string" then
-			slab_images[i] = {
-				name = image,
-				align_style = "world",
-			}
-		else
-			slab_images[i] = table.copy(image)
-			if image.align_style == nil then
-				slab_images[i].align_style = "world"
-			end
-		end
-	end
+	local slab_images = set_textures(images)
 	local new_groups = table.copy(groups)
 	new_groups.slab = 1
 	minetest.register_node(":stairs:slab_" .. subname, {
@@ -171,25 +163,7 @@ end
 
 -- Node will be called stairs:corner_<subname> (outer stair)
 function stairs.register_corner(subname, recipeitem, groups, images, description, snds, alpha)
-	-- Set backface culling and world-aligned textures
-	local stair_images = {}
-	for i, image in ipairs(images) do
-		if type(image) == "string" then
-			stair_images[i] = {
-				name = image,
-				backface_culling = true,
-				align_style = "world",
-			}
-		else
-			stair_images[i] = table.copy(image)
-			if stair_images[i].backface_culling == nil then
-				stair_images[i].backface_culling = true
-			end
-			if stair_images[i].align_style == nil then
-				stair_images[i].align_style = "world"
-			end
-		end
-	end
+	local stair_images = set_textures(images)
 	local new_groups = table.copy(groups)
 	new_groups.stair = 1
 	minetest.register_node(":stairs:corner_" .. subname, {
@@ -239,25 +213,7 @@ end
 
 -- Node will be called stairs:invcorner_<subname> (inner stair)
 function stairs.register_invcorner(subname, recipeitem, groups, images, description, snds, alpha)
-	-- Set backface culling and world-aligned textures
-	local stair_images = {}
-	for i, image in ipairs(images) do
-		if type(image) == "string" then
-			stair_images[i] = {
-				name = image,
-				backface_culling = true,
-				align_style = "world",
-			}
-		else
-			stair_images[i] = table.copy(image)
-			if stair_images[i].backface_culling == nil then
-				stair_images[i].backface_culling = true
-			end
-			if stair_images[i].align_style == nil then
-				stair_images[i].align_style = "world"
-			end
-		end
-	end
+	local stair_images = set_textures(images)
 	local new_groups = table.copy(groups)
 	new_groups.stair = 1
 	minetest.register_node(":stairs:invcorner_" .. subname, {
@@ -308,25 +264,7 @@ end
 
 -- Node will be called stairs:slope_<subname>
 function stairs.register_slope(subname, recipeitem, groups, images, description, snds, alpha)
-	-- Set backface culling and world-aligned textures
-	local stair_images = {}
-	for i, image in ipairs(images) do
-		if type(image) == "string" then
-			stair_images[i] = {
-				name = image,
-				backface_culling = true,
-				align_style = "world",
-			}
-		else
-			stair_images[i] = table.copy(image)
-			if stair_images[i].backface_culling == nil then
-				stair_images[i].backface_culling = true
-			end
-			if stair_images[i].align_style == nil then
-				stair_images[i].align_style = "world"
-			end
-		end
-	end
+	local stair_images = set_textures(images)
 	local new_groups = table.copy(groups)
 	new_groups.stair = 1
 	minetest.register_node(":stairs:slope_" .. subname, {
