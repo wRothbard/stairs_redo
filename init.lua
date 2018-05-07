@@ -17,17 +17,14 @@ stairs.dirt = default.node_sound_dirt_defaults()
 stairs.stone = default.node_sound_stone_defaults()
 stairs.glass = default.node_sound_glass_defaults()
 stairs.leaves = default.node_sound_leaves_defaults()
+stairs.metal = default.node_sound_metal_defaults()
 stairs.wool = stairs.leaves
 if minetest.get_modpath("xanadu") then
-	stairs.wool = default.node_sound_wool_defaults() -- Xanadu only
+	stairs.wool = default.node_sound_wool_defaults()
 end
 
--- Don"t break on 0.4.14 and earlier.
-stairs.metal = (default.node_sound_metal_defaults
-		and default.node_sound_metal_defaults() or stairs.stone)
-
 -- cache creative
-local creative = minetest.setting_getbool("creative_mode")
+local creative = minetest.settings:get_bool("creative_mode")
 function is_creative_enabled_for(name)
 	if creative or minetest.check_player_privs(name, {creative = true}) then
 		return true
@@ -701,7 +698,7 @@ end
 
 --= Mobs Mod
 
-if mobs and mobs.mod and mobs.mod == "redo" then
+if minetest.registered_nodes["mobs:cheeseblock"] then
 
 grp = {crumbly = 3, flammable = 2}
 
