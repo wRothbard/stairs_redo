@@ -536,6 +536,12 @@ stairs.register_all("bronzeblock", "default:bronzeblock",
 	{"default_bronze_block.png"},
 	"Bronze",
 	stairs.metal)
+--========
+stairs.register_all("tinlock", "default:tinblock",
+	{cracky = 1, level = 2},
+	{"default_tin_block.png"},
+	"Tin",
+	stairs.metal)
 
 stairs.register_all("mese", "default:mese",
 	{cracky = 1, level = 2},
@@ -643,12 +649,6 @@ end
 if minetest.get_modpath("moreores") then
 
 grp = {cracky = 1, level = 2}
-
-stairs.register_all("tin_block", "moreores:tin_block",
-	grp,
-	{"moreores_tin_block.png"},
-	"Tin",
-	stairs.metal)
 
 stairs.register_all("silver_block", "moreores:silver_block",
 	grp,
