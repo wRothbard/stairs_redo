@@ -17,8 +17,10 @@ stairs.dirt = default.node_sound_dirt_defaults()
 stairs.stone = default.node_sound_stone_defaults()
 stairs.glass = default.node_sound_glass_defaults()
 stairs.leaves = default.node_sound_leaves_defaults()
-stairs.wool = default.node_sound_wool_defaults() -- Xanadu only
---stairs.wool = stairs.leaves
+stairs.wool = stairs.leaves
+if minetest.get_modpath("xanadu") then
+	stairs.wool = default.node_sound_wool_defaults() -- Xanadu only
+end
 
 -- Don"t break on 0.4.14 and earlier.
 stairs.metal = (default.node_sound_metal_defaults
@@ -50,41 +52,43 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 			stair_images[i] = {
 				name = image,
 				backface_culling = true,
+				align_style = "world",
 			}
 		elseif image.backface_culling == nil then -- override using any other value
-			stair_images[i] = table.copy(image)
-			stair_images[i].backface_culling = true
+			if stair_images[i].backface_culling == nil then
+				stair_images[i].backface_culling = true
+			end
+			if stair_images[i].align_style == nil then
+				stair_images[i].align_style = "world"
+			end
 		end
 	end
-	groups.stair = 1
+	local new_groups = table.copy(groups)
+	new_groups.stair = 1
 	minetest.register_node(":stairs:stair_" .. subname, {
 		description = description,
-		drawtype = "mesh",
-		mesh = "stairs_stair.obj",
-		tiles = stair_images, -- images,
+		drawtype = "nodebox",
+		tiles = stair_images,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		use_texture_alpha = alpha,
-		groups = groups,
+		groups = new_groups,
 		sounds = snds,
-		selection_box = {
+		node_box = {
 			type = "fixed",
 			fixed = {
 				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
 				{-0.5, 0, 0, 0.5, 0.5, 0.5},
 			},
 		},
-		collision_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-				{-0.5, 0, 0, 0.5, 0.5, 0.5},
-			},
-		},
-		--on_place = minetest.rotate_node
 		on_place = rotate_node
 	})
+
+	-- if no recipe item provided then skip craft recipes
+	if not recipeitem then
+		return
+	end
 
 	-- stair recipes
 	minetest.register_craft({
@@ -92,15 +96,6 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 		recipe = {
 			{recipeitem, "", ""},
 			{recipeitem, recipeitem, ""},
-			{recipeitem, recipeitem, recipeitem},
-		},
-	})
-
-	minetest.register_craft({
-		output = "stairs:stair_" .. subname .. " 8",
-		recipe = {
-			{"", "", recipeitem},
-			{"", recipeitem, recipeitem},
 			{recipeitem, recipeitem, recipeitem},
 		},
 	})
@@ -113,29 +108,48 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 			{"stairs:stair_" .. subname, "stairs:stair_" .. subname},
 		},
 	})
-
 end
 
 -- Node will be called stairs:slab_<subname>
 function stairs.register_slab(subname, recipeitem, groups, images, description, snds, alpha)
-	groups.slab = 1
+	-- Set world-aligned textures
+	local slab_images = {}
+	for i, image in ipairs(images) do
+		if type(image) == "string" then
+			slab_images[i] = {
+				name = image,
+				align_style = "world",
+			}
+		else
+			slab_images[i] = table.copy(image)
+			if image.align_style == nil then
+				slab_images[i].align_style = "world"
+			end
+		end
+	end
+	local new_groups = table.copy(groups)
+	new_groups.slab = 1
 	minetest.register_node(":stairs:slab_" .. subname, {
 		description = description,
 		drawtype = "nodebox",
-		tiles = images,
+		tiles = slab_images,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		use_texture_alpha = alpha,
-		groups = groups,
+		groups = new_groups,
 		sounds = snds,
 		node_box = {
 			type = "fixed",
 			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
 		},
-		--on_place = minetest.rotate_node
 		on_place = rotate_node
 	})
+
+	-- if no recipe item provided then skip craft recipes
+	if not recipeitem then
+		return
+	end
 
 	-- slab recipe
 	minetest.register_craft({
@@ -147,23 +161,46 @@ function stairs.register_slab(subname, recipeitem, groups, images, description, 
 
 	-- slab to original material recipe
 	minetest.register_craft({
-		type = "shapeless",
 		output = recipeitem,
-		recipe = {"stairs:slab_" .. subname, "stairs:slab_" .. subname}
+		recipe = {
+			{"stairs:slab_" .. subname},
+			{"stairs:slab_" .. subname},
+		},
 	})
 end
 
--- Node will be called stairs:corner_<subname>
+-- Node will be called stairs:corner_<subname> (outer stair)
 function stairs.register_corner(subname, recipeitem, groups, images, description, snds, alpha)
+	-- Set backface culling and world-aligned textures
+	local stair_images = {}
+	for i, image in ipairs(images) do
+		if type(image) == "string" then
+			stair_images[i] = {
+				name = image,
+				backface_culling = true,
+				align_style = "world",
+			}
+		else
+			stair_images[i] = table.copy(image)
+			if stair_images[i].backface_culling == nil then
+				stair_images[i].backface_culling = true
+			end
+			if stair_images[i].align_style == nil then
+				stair_images[i].align_style = "world"
+			end
+		end
+	end
+	local new_groups = table.copy(groups)
+	new_groups.stair = 1
 	minetest.register_node(":stairs:corner_" .. subname, {
 		description = description,
 		drawtype = "nodebox",
-		tiles = images,
+		tiles = stair_images,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		use_texture_alpha = alpha,
-		groups = groups,
+		groups = new_groups,
 		sounds = snds,
 		node_box = {
 			type = "fixed",
@@ -172,9 +209,13 @@ function stairs.register_corner(subname, recipeitem, groups, images, description
 				{-0.5, 0, 0, 0, 0.5, 0.5},
 			},
 		},
-		--on_place = minetest.rotate_node
 		on_place = rotate_node
 	})
+
+	-- if no recipe item provided then skip craft recipes
+	if not recipeitem then
+		return
+	end
 
 	-- corner stair recipe
 	minetest.register_craft({
@@ -188,23 +229,46 @@ function stairs.register_corner(subname, recipeitem, groups, images, description
 
 	-- corner stair to original material recipe
 	minetest.register_craft({
-		type = "shapeless",
 		output = recipeitem .. " 2",
-		recipe = {"stairs:corner_" .. subname, "stairs:corner_" .. subname, "stairs:corner_" .. subname}
+		recipe = {
+			{"stairs:corner_" .. subname, "stairs:corner_" .. subname},
+			{"stairs:corner_" .. subname, "stairs:corner_" .. subname},
+		},
 	})
 end
 
--- Node will be called stairs:invcorner_<subname>
+-- Node will be called stairs:invcorner_<subname> (inner stair)
 function stairs.register_invcorner(subname, recipeitem, groups, images, description, snds, alpha)
+	-- Set backface culling and world-aligned textures
+	local stair_images = {}
+	for i, image in ipairs(images) do
+		if type(image) == "string" then
+			stair_images[i] = {
+				name = image,
+				backface_culling = true,
+				align_style = "world",
+			}
+		else
+			stair_images[i] = table.copy(image)
+			if stair_images[i].backface_culling == nil then
+				stair_images[i].backface_culling = true
+			end
+			if stair_images[i].align_style == nil then
+				stair_images[i].align_style = "world"
+			end
+		end
+	end
+	local new_groups = table.copy(groups)
+	new_groups.stair = 1
 	minetest.register_node(":stairs:invcorner_" .. subname, {
 		description = description,
 		drawtype = "nodebox",
-		tiles = images,
+		tiles = stair_images,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		use_texture_alpha = alpha,
-		groups = groups,
+		groups = new_groups,
 		sounds = snds,
 		node_box = {
 			type = "fixed",
@@ -214,13 +278,17 @@ function stairs.register_invcorner(subname, recipeitem, groups, images, descript
 				{-0.5, 0, -0.5, 0, 0.5, 0},
 			},
 		},
-		--on_place = minetest.rotate_node
 		on_place = rotate_node
 	})
 
+	-- if no recipe item provided then skip craft recipes
+	if not recipeitem then
+		return
+	end
+
 	-- inside corner stair recipe
 	minetest.register_craft({
-		output = "stairs:invcorner_" .. subname .. " 6", -- was 8
+		output = "stairs:invcorner_" .. subname .. " 9",
 		recipe = {
 			{recipeitem, recipeitem, ""},
 			{recipeitem, recipeitem, recipeitem},
@@ -230,37 +298,47 @@ function stairs.register_invcorner(subname, recipeitem, groups, images, descript
 
 	-- inside corner stair to original material recipe
 	minetest.register_craft({
-		type = "shapeless",
-		output = recipeitem .. " 4",
-		recipe = {"stairs:invcorner_" .. subname,
-		"stairs:invcorner_" .. subname, "stairs:invcorner_" .. subname}
+		output = recipeitem .. " 3",
+		recipe = {
+			{"stairs:invcorner_" .. subname, "stairs:invcorner_" .. subname},
+			{"stairs:invcorner_" .. subname, "stairs:invcorner_" .. subname},
+		},
 	})
 end
 
 -- Node will be called stairs:slope_<subname>
 function stairs.register_slope(subname, recipeitem, groups, images, description, snds, alpha)
+	-- Set backface culling and world-aligned textures
 	local stair_images = {}
 	for i, image in ipairs(images) do
 		if type(image) == "string" then
 			stair_images[i] = {
 				name = image,
 				backface_culling = true,
+				align_style = "world",
 			}
-		elseif image.backface_culling == nil then -- override using any other value
+		else
 			stair_images[i] = table.copy(image)
-			stair_images[i].backface_culling = true
+			if stair_images[i].backface_culling == nil then
+				stair_images[i].backface_culling = true
+			end
+			if stair_images[i].align_style == nil then
+				stair_images[i].align_style = "world"
+			end
 		end
 	end
+	local new_groups = table.copy(groups)
+	new_groups.stair = 1
 	minetest.register_node(":stairs:slope_" .. subname, {
 		description = description,
 		drawtype = "mesh",
 		mesh = "stairs_slope.obj",
-		tiles = stair_images, --images,
+		tiles = stair_images,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		use_texture_alpha = alpha,
-		groups = groups,
+		groups = new_groups,
 		sounds = snds,
 		selection_box = {
 			type = "fixed",
@@ -276,7 +354,6 @@ function stairs.register_slope(subname, recipeitem, groups, images, description,
 				{-0.5, 0, 0, 0.5, 0.5, 0.5},
 			},
 		},
-		--on_place = minetest.rotate_node
 		on_place = rotate_node
 	})
 
@@ -291,9 +368,10 @@ function stairs.register_slope(subname, recipeitem, groups, images, description,
 
 	-- slope to original material recipe
 	minetest.register_craft({
-		type = "shapeless",
 		output = recipeitem,
-		recipe = {"stairs:slope_" .. subname, "stairs:slope_" .. subname}
+		recipe = {
+			{"stairs:slope_" .. subname, "stairs:slope_" .. subname},
+		},
 	})
 end
 
@@ -306,16 +384,16 @@ end
 
 -- Nodes will be called stairs:{stair,slab,corner,invcorner,slope}_<subname>
 function stairs.register_all(subname, recipeitem, groups, images, desc, snds, alpha)
-	local str = " Stair"
-	stairs.register_stair(subname, recipeitem, groups, images, desc .. str, snds, alpha)
-	str = " Slab"
-	stairs.register_slab(subname, recipeitem, groups, images, desc .. str, snds, alpha)
-	str = " Corner"
-	stairs.register_corner(subname, recipeitem, groups, images, desc .. str, snds, alpha)
-	str = " Inverted Corner"
-	stairs.register_invcorner(subname, recipeitem, groups, images, desc .. str, snds, alpha)
-	str = " Slope"
-	stairs.register_slope(subname, recipeitem, groups, images, desc .. str, snds, alpha)
+	stairs.register_stair(subname, recipeitem, groups, images,
+		desc .. " stair", snds, alpha)
+	stairs.register_slab(subname, recipeitem, groups, images,
+		desc .. " Slab", snds, alpha)
+	stairs.register_corner(subname, recipeitem, groups, images,
+		desc .. " Corner", snds, alpha)
+	stairs.register_invcorner(subname, recipeitem, groups, images,
+		desc .. " Inverted Corner", snds, alpha)
+	stairs.register_slope(subname, recipeitem, groups, images,
+		desc .. " Slope", snds, alpha)
 end
 
 -- Wait for mods to load before registering stairs
@@ -536,8 +614,8 @@ stairs.register_all("bronzeblock", "default:bronzeblock",
 	{"default_bronze_block.png"},
 	"Bronze",
 	stairs.metal)
---========
-stairs.register_all("tinlock", "default:tinblock",
+
+stairs.register_all("tinblock", "default:tinblock",
 	{cracky = 1, level = 2},
 	{"default_tin_block.png"},
 	"Tin",
