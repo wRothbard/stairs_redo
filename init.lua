@@ -703,7 +703,7 @@ stairs.register_all("mithril_block", "moreores:mithril_block",
 
 end
 
---= Farming Mod
+--[[= Farming Mod
 if minetest.get_modpath("farming") then
 
 stairs.register_all("straw", "farming:straw",
@@ -721,7 +721,7 @@ stairs.register_all("hemp_block", "farming:hemp_block",
 end
 
 end
-
+]]
 --= Mobs Mod
 
 if minetest.registered_nodes["mobs:cheeseblock"] then
