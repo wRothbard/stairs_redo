@@ -914,22 +914,6 @@ stairs.register_all("bred2", "xanadu:red2",
 
 end
 
---= Baked Clay mod
-
-if minetest.get_modpath("bakedclay") then
-
-for i = 1, #colours, 1 do
-
-stairs.register_all("bakedclay_" .. colours[i][1], "bakedclay:" .. colours[i][1],
-	{cracky = 3},
-	{"baked_clay_" .. colours[i][1] .. ".png"},
-	colours[i][2] .. " Baked Clay",
-	stairs.stone)
-
-end -- END for
-
-end
-
 --= Castle Mod
 
 if minetest.get_modpath("castle") then
