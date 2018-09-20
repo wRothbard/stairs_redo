@@ -36,16 +36,6 @@ function is_creative_enabled_for(name)
 end
 
 
--- stair rotation
-local rotate_node = function(itemstack, placer, pointed_thing)
-	core.rotate_and_place(itemstack, placer, pointed_thing,
-			is_creative_enabled_for(placer:get_player_name()),
-			{invert_wall = placer:get_player_control().sneak})
-
-	return itemstack
-end
-
-
 -- process textures
 local set_textures = function(images)
 	local stair_images = {}
@@ -66,6 +56,32 @@ local set_textures = function(images)
 		end
 	end
 	return stair_images
+end
+
+
+-- placement helper
+local stair_place = function(itemstack, placer, pointed_thing, stair_node)
+
+	if placer:is_player() and placer:get_player_control().sneak then
+
+		local pos = pointed_thing.under
+		local param2 = minetest.get_node(pos).param2
+
+		minetest.set_node(pointed_thing.above,
+				{name = stair_node, param2 = param2})
+
+		if not is_creative_enabled_for(placer:get_player_name()) then
+			itemstack:take_item()
+		end
+
+		return itemstack
+	end
+
+	core.rotate_and_place(itemstack, placer, pointed_thing,
+			is_creative_enabled_for(placer:get_player_name()),
+			{invert_wall = placer:get_player_control().sneak})
+
+	return itemstack
 end
 
 
@@ -92,7 +108,10 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 				{-0.5, 0, 0, 0.5, 0.5, 0.5},
 			},
 		},
-		on_place = rotate_node
+		on_place = function(itemstack, placer, pointed_thing)
+			return stair_place(itemstack, placer, pointed_thing,
+					"stairs:stair_" .. subname)
+		end,
 	})
 
 	-- if no recipe item provided then skip craft recipes
@@ -141,7 +160,10 @@ function stairs.register_slab(subname, recipeitem, groups, images, description, 
 			type = "fixed",
 			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
 		},
-		on_place = rotate_node
+		on_place = function(itemstack, placer, pointed_thing)
+			return stair_place(itemstack, placer, pointed_thing,
+					"stairs:slab_" .. subname)
+		end,
 	})
 
 	-- if no recipe item provided then skip craft recipes
@@ -191,7 +213,10 @@ function stairs.register_stair_outer(subname, recipeitem, groups, images, descri
 				{-0.5, 0, 0, 0, 0.5, 0.5},
 			},
 		},
-		on_place = rotate_node
+		on_place = function(itemstack, placer, pointed_thing)
+			return stair_place(itemstack, placer, pointed_thing,
+					"stairs:stair_outer_" .. subname)
+		end,
 	})
 
 	-- add alias for old stairs redo name
@@ -253,7 +278,10 @@ function stairs.register_stair_inner(subname, recipeitem, groups, images, descri
 				{-0.5, 0, -0.5, 0, 0.5, 0},
 			},
 		},
-		on_place = rotate_node
+		on_place = function(itemstack, placer, pointed_thing)
+			return stair_place(itemstack, placer, pointed_thing,
+					"stairs:stair_inner_" .. subname)
+		end,
 	})
 
 	-- add alias for old stairs redo name
@@ -321,7 +349,10 @@ function stairs.register_slope(subname, recipeitem, groups, images, description,
 				{-0.5, 0, 0, 0.5, 0.5, 0.5},
 			},
 		},
-		on_place = rotate_node
+		on_place = function(itemstack, placer, pointed_thing)
+			return stair_place(itemstack, placer, pointed_thing,
+					"stairs:slope_" .. subname)
+		end,
 	})
 
 	-- slope recipe
@@ -538,6 +569,8 @@ stairs.register_stair("cloud", "default:cloud",
 
 minetest.override_item("stairs:stair_cloud", {
 	on_blast = function() end,
+	on_drop = function(itemstack, dropper, pos) end,
+	drop = {},
 })
 
 stairs.register_slab("cloud", "default:cloud",
@@ -548,6 +581,8 @@ stairs.register_slab("cloud", "default:cloud",
 
 minetest.override_item("stairs:slab_cloud", {
 	on_blast = function() end,
+	on_drop = function(itemstack, dropper, pos) end,
+	drop = {},
 })
 
 -- Ores
