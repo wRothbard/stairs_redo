@@ -65,16 +65,20 @@ local stair_place = function(itemstack, placer, pointed_thing, stair_node)
 	if placer:is_player() and placer:get_player_control().sneak then
 
 		local pos = pointed_thing.under
-		local param2 = minetest.get_node(pos).param2
+		local node = minetest.get_node(pos)
+		local def = minetest.registered_nodes[stair_node]
 
-		minetest.set_node(pointed_thing.above,
-				{name = stair_node, param2 = param2})
+		if node.name == "air" or def.buildable_to then
 
-		if not is_creative_enabled_for(placer:get_player_name()) then
-			itemstack:take_item()
+			minetest.set_node(pointed_thing.above,
+					{name = stair_node, param2 = node.param2})
+
+			if not is_creative_enabled_for(placer:get_player_name()) then
+				itemstack:take_item()
+			end
+
+			return itemstack
 		end
-
-		return itemstack
 	end
 
 	core.rotate_and_place(itemstack, placer, pointed_thing,
