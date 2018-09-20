@@ -62,23 +62,29 @@ end
 -- placement helper
 local stair_place = function(itemstack, placer, pointed_thing, stair_node)
 
+	-- if sneak pressed then use param2 in node pointed at when placing
 	if placer:is_player() and placer:get_player_control().sneak then
 
-		local pos = pointed_thing.under
-		local node = minetest.get_node(pos)
-		local def = minetest.registered_nodes[stair_node]
+		local name  = placer:get_player_name()
+		local pos_a = pointed_thing.above
+		local node_a = minetest.get_node(pos_a)
+		local def_a = minetest.registered_nodes[node_a.name]
 
-		if node.name == "air" or def.buildable_to then
-
-			minetest.set_node(pointed_thing.above,
-					{name = stair_node, param2 = node.param2})
-
-			if not is_creative_enabled_for(placer:get_player_name()) then
-				itemstack:take_item()
-			end
-
+		if not def_a.buildable_to
+		or minetest.is_protected(pos_a, name) then
 			return itemstack
 		end
+
+		local pos_u = pointed_thing.under
+		local node_u = minetest.get_node(pos_u)
+
+		minetest.set_node(pos_a, {name = stair_node, param2 = node_u.param2})
+
+		if not is_creative_enabled_for(name) then
+			itemstack:take_item()
+		end
+
+		return itemstack
 	end
 
 	core.rotate_and_place(itemstack, placer, pointed_thing,
