@@ -78,13 +78,17 @@ local stair_place = function(itemstack, placer, pointed_thing, stair_node)
 		local pos_u = pointed_thing.under
 		local node_u = minetest.get_node(pos_u)
 
-		minetest.set_node(pos_a, {name = stair_node, param2 = node_u.param2})
+		if minetest.get_item_group(node_u.name, "stair") > 0
+		or minetest.get_item_group(node_u.name, "slab") > 0 then
 
-		if not is_creative_enabled_for(name) then
-			itemstack:take_item()
+			minetest.set_node(pos_a, {name = stair_node, param2 = node_u.param2})
+
+			if not is_creative_enabled_for(name) then
+				itemstack:take_item()
+			end
+
+			return itemstack
 		end
-
-		return itemstack
 	end
 
 	core.rotate_and_place(itemstack, placer, pointed_thing,
@@ -748,25 +752,6 @@ stairs.register_all("mithril_block", "moreores:mithril_block",
 
 end
 
---[[= Farming Mod
-if minetest.get_modpath("farming") then
-
-stairs.register_all("straw", "farming:straw",
-	{snappy = 3, flammable = 4},
-	{"farming_straw.png"},
-	"Straw",
-	stairs.leaves)
-
-if minetest.registered_nodes["farming:hemp_block"] then
-stairs.register_all("hemp_block", "farming:hemp_block",
-	{snappy = 1, flammable = 2},
-	{"farming_hemp_block.png"},
-	"Hemp Block",
-	stairs.leaves)
-end
-
-end
-]]
 --= Mobs Mod
 
 if minetest.registered_nodes["mobs:cheeseblock"] then
