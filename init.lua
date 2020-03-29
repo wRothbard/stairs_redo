@@ -44,9 +44,10 @@ local set_textures = function(images)
 			stair_images[i] = {
 				name = image,
 				backface_culling = true,
-				align_style = "world",
+				align_style = "world"
 			}
-		elseif image.backface_culling == nil then -- override using any other value
+		else
+			stair_images[i] = table.copy(image)
 			if stair_images[i].backface_culling == nil then
 				stair_images[i].backface_culling = true
 			end
