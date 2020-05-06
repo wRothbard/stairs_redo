@@ -14,7 +14,7 @@ http://www.gnu.org/licenses/lgpl-2.1.html
 
 License of media (textures and sounds)
 --------------------------------------
-Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)                                 
+Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
 http://creativecommons.org/licenses/by-sa/3.0/
 
 Authors of media files
@@ -24,3 +24,5 @@ Copyright (C) 2010-2012 celeron55, Perttu Ahola <celeron55@gmail.com>
 
 
 Note: This mod has been changed by TenPlus1 to include other blocks from different mods as well as corner stairs and slopes... Holding sneak when placing will copy the rotation of the block pointed at to the newly placed stair.
+
+Nodes with a light source will also have stairs using same light levels.

@@ -99,6 +99,16 @@ local stair_place = function(itemstack, placer, pointed_thing, stair_node)
 	return itemstack
 end
 
+local function get_light_source(nodename)
+
+	local def = minetest.registered_nodes[nodename]
+
+	if def and def.light_source then
+		return def.light_source
+	end
+
+	return nil
+end
 
 -- Node will be called stairs:stair_<subname>
 function stairs.register_stair(subname, recipeitem, groups, images, description, snds, alpha)
@@ -114,6 +124,7 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		use_texture_alpha = alpha,
+		light_source = get_light_source(recipeitem),
 		groups = new_groups,
 		sounds = snds,
 		node_box = {
@@ -169,6 +180,7 @@ function stairs.register_slab(subname, recipeitem, groups, images, description, 
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		use_texture_alpha = alpha,
+		light_source = get_light_source(recipeitem),
 		groups = new_groups,
 		sounds = snds,
 		node_box = {
@@ -219,6 +231,7 @@ function stairs.register_stair_outer(subname, recipeitem, groups, images, descri
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		use_texture_alpha = alpha,
+		light_source = get_light_source(recipeitem),
 		groups = new_groups,
 		sounds = snds,
 		node_box = {
@@ -283,6 +296,7 @@ function stairs.register_stair_inner(subname, recipeitem, groups, images, descri
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		use_texture_alpha = alpha,
+		light_source = get_light_source(recipeitem),
 		groups = new_groups,
 		sounds = snds,
 		node_box = {
@@ -348,6 +362,7 @@ function stairs.register_slope(subname, recipeitem, groups, images, description,
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		use_texture_alpha = alpha,
+		light_source = get_light_source(recipeitem),
 		groups = new_groups,
 		sounds = snds,
 		selection_box = {
@@ -495,7 +510,7 @@ stairs.register_all("desert_stone_block", "default:desert_stone_block",
 stairs.register_all("desert_cobble", "default:desert_cobble",
 	{cracky = 3},
 	{"default_desert_cobble.png"},
-	"Desert Cobble", 
+	"Desert Cobble",
 	stairs.stone)
 
 -- Sandstone types
@@ -981,27 +996,5 @@ end -- END for
 
 end
 
---= Caverealms lite mod
-if minetest.get_modpath("caverealms")
-and minetest.registered_nodes["caverealms:glow_obsidian_brick"] then
-
-stairs.register_all("hot_cobble", "caverealms:hot_cobble",
-	{cracky = 3},
-	{"caverealms_hot_cobble.png"},
-	"Hot Cobble",
-	stairs.stone)
-
-stairs.register_all("glow_obsidian_brick", "caverealms:glow_obsidian_brick",
-	{cracky = 1, level = 3},
-	{"caverealms_glow_obsidian_brick.png"},
-	"Glow Obsidian Brick",
-	stairs.stone)
-
-stairs.register_all("glow_obsidian_brick_2", "caverealms:glow_obsidian_brick_2",
-	{cracky = 1, level = 3},
-	{"caverealms_glow_obsidian_brick_2.png"},
-	"Glow Obsidian Brick 2",
-	stairs.stone)
-end
 
 print ("[MOD] Stairs Redo loaded")
