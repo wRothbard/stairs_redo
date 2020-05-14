@@ -1,3 +1,7 @@
+local default_path = minetest.get_modpath("default")
+
+dofile(default_path.."/init.lua")
+
 stairs = {}
 stairs.mod = "redo"
 
@@ -433,23 +437,23 @@ stairs.register_all("wood", "default:wood",
 	"Wooden",
 	stairs.wood)
 
-stairs.register_all("junglewood", "default:junglewood",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
-	{"default_junglewood.png"},
-	"Jungle Wood",
-	stairs.wood)
+-- stairs.register_all("junglewood", "default:junglewood",
+	-- {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+	-- {"default_junglewood.png"},
+	-- "Jungle Wood",
+	-- stairs.wood)
 
-stairs.register_all("pine_wood", "default:pinewood",
-	{choppy = 2, oddly_breakable_by_hand = 1, flammable = 3},
-	{"default_pine_wood.png"},
-	"Pine Wood",
-	stairs.wood)
+-- stairs.register_all("pine_wood", "default:pinewood",
+	-- {choppy = 2, oddly_breakable_by_hand = 1, flammable = 3},
+	-- {"default_pine_wood.png"},
+	-- "Pine Wood",
+	-- stairs.wood)
 
-stairs.register_all("acacia_wood", "default:acacia_wood",
-	{choppy = 2, oddly_breakable_by_hand = 1, flammable = 3},
-	{"default_acacia_wood.png"},
-	"Acacia Wood",
-	stairs.wood)
+-- stairs.register_all("acacia_wood", "default:acacia_wood",
+	-- {choppy = 2, oddly_breakable_by_hand = 1, flammable = 3},
+	-- {"default_acacia_wood.png"},
+	-- "Acacia Wood",
+	-- stairs.wood)
 
 stairs.register_all("aspen_wood", "default:aspen_wood",
 	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
@@ -461,57 +465,57 @@ stairs.register_all("aspen_wood", "default:aspen_wood",
 
 stairs.register_all("stone", "default:stone",
 	{cracky=3,stone=1, },
-	{"default_stone.png"},
+	{"stone_stone.png"},
 	"Stone",
 	stairs.stone)
 
 stairs.register_all("stonebrick", "default:stonebrick",
 	{cracky = 2},
-	{"default_stone_brick.png"},
+	{"stone_brick.png"},
 	"Stone Brick",
 	stairs.stone)
 
 stairs.register_all("stone_block", "default:stone_block",
 	{cracky = 2},
-	{"default_stone_block.png"},
+	{"stone_block.png"},
 	"Stone Block",
 	stairs.stone)
 
 stairs.register_all("cobble", "default:cobble",
 	{cracky = 3},
-	{"default_cobble.png"},
+	{"stone_cobble.png"},
 	"Cobble",
 	stairs.stone)
 
 stairs.register_all("mossycobble", "default:mossycobble",
 	{cracky = 3},
-	{"default_mossycobble.png"},
+	{"stone_mossycobble.png"},
 	"Mossy Cobble",
 	stairs.stone)
 
-stairs.register_all("desert_stone", "default:desert_stone",
-	{cracky = 3},
-	{"default_desert_stone.png"},
-	"Desert Stone",
-	stairs.stone)
+-- stairs.register_all("desert_stone", "default:desert_stone",
+	-- {cracky = 3},
+	-- {"default_desert_stone.png"},
+	-- "Desert Stone",
+	-- stairs.stone)
 
-stairs.register_all("desert_stonebrick", "default:desert_stonebrick",
-	{cracky = 3},
-	{"default_desert_stone_brick.png"},
-	"Desert Stone Brick",
-	stairs.stone)
+-- stairs.register_all("desert_stonebrick", "default:desert_stonebrick",
+	-- {cracky = 3},
+	-- {"default_desert_stone_brick.png"},
+	-- "Desert Stone Brick",
+	-- stairs.stone)
 
-stairs.register_all("desert_stone_block", "default:desert_stone_block",
-	{cracky = 2},
-	{"default_desert_stone_block.png"},
-	"Desert Stone Block",
-	stairs.stone)
+-- stairs.register_all("desert_stone_block", "default:desert_stone_block",
+	-- {cracky = 2},
+	-- {"default_desert_stone_block.png"},
+	-- "Desert Stone Block",
+	-- stairs.stone)
 
-stairs.register_all("desert_cobble", "default:desert_cobble",
-	{cracky = 3},
-	{"default_desert_cobble.png"},
-	"Desert Cobble",
-	stairs.stone)
+-- stairs.register_all("desert_cobble", "default:desert_cobble",
+	-- {cracky = 3},
+	-- {"default_desert_cobble.png"},
+	-- "Desert Cobble",
+	-- stairs.stone)
 
 -- Sandstone types
 
@@ -533,87 +537,87 @@ stairs.register_all("sandstone_block", "default:sandstone_block",
 	"Sandstone Block",
 	stairs.stone)
 
-stairs.register_all("desert_sandstone", "default:desert_sandstone",
-	{crumbly = 1, cracky = 3},
-	{"default_desert_sandstone.png"},
-	"Desert Sandstone",
-	stairs.stone)
+-- stairs.register_all("desert_sandstone", "default:desert_sandstone",
+	-- {crumbly = 1, cracky = 3},
+	-- {"default_desert_sandstone.png"},
+	-- "Desert Sandstone",
+	-- stairs.stone)
 
-stairs.register_all("desert_sandstone_brick", "default:desert_sandstone_brick",
-	{cracky = 2},
-	{"default_desert_sandstone_brick.png"},
-	"Desert Sandstone Brick",
-	stairs.stone)
+-- stairs.register_all("desert_sandstone_brick", "default:desert_sandstone_brick",
+	-- {cracky = 2},
+	-- {"default_desert_sandstone_brick.png"},
+	-- "Desert Sandstone Brick",
+	-- stairs.stone)
 
-stairs.register_all("desert_sandstone_block", "default:desert_sandstone_block",
-	{cracky = 2},
-	{"default_desert_sandstone_block.png"},
-	"Desert Sandstone Block",
-	stairs.stone)
+-- stairs.register_all("desert_sandstone_block", "default:desert_sandstone_block",
+	-- {cracky = 2},
+	-- {"default_desert_sandstone_block.png"},
+	-- "Desert Sandstone Block",
+	-- stairs.stone)
 
-stairs.register_all("silver_sandstone", "default:silver_sandstone",
-	{crumbly = 1, cracky = 3},
-	{"default_silver_sandstone.png"},
-	"Silver Sandstone",
-	stairs.stone)
+-- stairs.register_all("silver_sandstone", "default:silver_sandstone",
+	-- {crumbly = 1, cracky = 3},
+	-- {"default_silver_sandstone.png"},
+	-- "Silver Sandstone",
+	-- stairs.stone)
 
-stairs.register_all("silver_sandstone_brick", "default:silver_sandstone_brick",
-	{cracky = 2},
-	{"default_silver_sandstone_brick.png"},
-	"Silver Sandstone Brick",
-	stairs.stone)
+-- stairs.register_all("silver_sandstone_brick", "default:silver_sandstone_brick",
+	-- {cracky = 2},
+	-- {"default_silver_sandstone_brick.png"},
+	-- "Silver Sandstone Brick",
+	-- stairs.stone)
 
-stairs.register_all("silver_sandstone_block", "default:silver_sandstone_block",
-	{cracky = 2},
-	{"default_silver_sandstone_block.png"},
-	"Silver Sandstone Block",
-	stairs.stone)
+-- stairs.register_all("silver_sandstone_block", "default:silver_sandstone_block",
+	-- {cracky = 2},
+	-- {"default_silver_sandstone_block.png"},
+	-- "Silver Sandstone Block",
+	-- stairs.stone)
 
 -- Obsidian
 
 stairs.register_all("obsidian", "default:obsidian",
 	{cracky = 1, level = 2},
-	{"default_obsidian.png"},
+	{"obsidian_obsidian.png"},
 	"Obsidian",
 	stairs.stone)
 
 stairs.register_all("obsidianbrick", "default:obsidianbrick",
 	{cracky = 1, level = 3},
-	{"default_obsidian_brick.png"},
+	{"obsidian_brick.png"},
 	"Obsidian Brick",
 	stairs.stone)
 
 stairs.register_all("obsidian_block", "default:obsidian_block",
 	{cracky = 1, level = 3},
-	{"default_obsidian_block.png"},
+	{"obsidian_block.png"},
 	"Obsidian block",
 	stairs.stone)
 
 -- Cloud (with overrides)
 
-stairs.register_stair("cloud", "default:cloud",
-	{unbreakable = 1, not_in_creative_inventory = 1},
-	{"default_cloud.png"},
-	"Cloud Stair",
-	stairs.wool)
+-- stairs.register_stair("cloud", "default:cloud",
+	-- {unbreakable = 1, not_in_creative_inventory = 1},
+	-- {"default_cloud.png"},
+	-- "Cloud Stair",
+	-- stairs.wool)
 
-minetest.override_item("stairs:stair_cloud", {
-	on_blast = function() end,
-	on_drop = function(itemstack, dropper, pos) end,
-	drop = {},
-})
+-- minetest.override_item("stairs:stair_cloud", {
+	-- on_blast = function() end,
+	-- on_drop = function(itemstack, dropper, pos) end,
+	-- drop = {},
+-- })
 
-stairs.register_slab("cloud", "default:cloud",
-	{unbreakable = 1, not_in_creative_inventory = 1},
-	{"default_cloud.png"},
-	"Cloud Slab",
-	stairs.wool)
+-- stairs.register_slab("cloud", "default:cloud",
+	-- {unbreakable = 1, not_in_creative_inventory = 1},
+	-- {"default_cloud.png"},
+	-- "Cloud Slab",
+	-- stairs.wool)
 
-minetest.override_item("stairs:slab_cloud", {
-	on_blast = function() end,
-	on_drop = function(itemstack, dropper, pos) end,
-	drop = {},
-})
+-- minetest.override_item("stairs:slab_cloud", {
+	-- on_blast = function() end,
+	-- on_drop = function(itemstack, dropper, pos) end,
+	-- drop = {},
+-- })
 
 -- Ores
 
@@ -625,13 +629,13 @@ stairs.register_all("coal", "default:coalblock",
 
 stairs.register_all("steelblock", "default:steelblock",
 	{cracky = 1, level = 2},
-	{"default_steel_block.png"},
+	{"steel_block.png"},
 	"Steel",
 	stairs.metal)
 
 stairs.register_all("copperblock", "default:copperblock",
 	{cracky = 1, level = 2},
-	{"default_copper_block.png"},
+	{"copper_block.png"},
 	"Copper",
 	stairs.metal)
 
@@ -641,15 +645,15 @@ stairs.register_all("bronzeblock", "default:bronzeblock",
 	"Bronze",
 	stairs.metal)
 
-stairs.register_all("tinblock", "default:tinblock",
-	{cracky = 1, level = 2},
-	{"default_tin_block.png"},
-	"Tin",
-	stairs.metal)
+-- stairs.register_all("tinblock", "default:tinblock",
+	-- {cracky = 1, level = 2},
+	-- {"default_tin_block.png"},
+	-- "Tin",
+	-- stairs.metal)
 
 stairs.register_all("mese", "default:mese",
 	{cracky = 1, level = 2},
-	{"default_mese_block.png"},
+	{"mese_mese.png"},
 	"Mese",
 	stairs.stone)
 
@@ -675,7 +679,7 @@ stairs.register_all("glass", "default:glass",
 
 stairs.register_all("obsidian_glass", "default:obsidian_glass",
 	{cracky = 2},
-	{"default_obsidian_glass.png"},
+	{"obsidian_glass.png"},
 	"Obsidian Glass",
 	stairs.glass)
 
@@ -687,19 +691,19 @@ stairs.register_all("brick", "default:brick",
 	"Brick",
 	stairs.stone)
 
-stairs.register_all("snowblock", "default:snowblock",
-	{crumbly = 3, puts_out_fire = 1, cools_lava = 1, snowy = 1},
-	{"default_snow.png"},
-	"Snow Block",
-	default.node_sound_dirt_defaults({
-		footstep = {name = "default_snow_footstep", gain = 0.15},
-		dug = {name = "default_snow_footstep", gain = 0.2},
-		dig = {name = "default_snow_footstep", gain = 0.2}
-	}))
+-- stairs.register_all("snowblock", "default:snowblock",
+	-- {crumbly = 3, puts_out_fire = 1, cools_lava = 1, snowy = 1},
+	-- {"default_snow.png"},
+	-- "Snow Block",
+	-- default.node_sound_dirt_defaults({
+		-- footstep = {name = "default_snow_footstep", gain = 0.15},
+		-- dug = {name = "default_snow_footstep", gain = 0.2},
+		-- dig = {name = "default_snow_footstep", gain = 0.2}
+	-- }))
 
 stairs.register_all("ice", "default:ice",
 	{cracky = 3, puts_out_fire = 1, cools_lava = 1},
-	{"default_ice.png"},
+	{"water_ice.png"},
 	"Ice",
 	default.node_sound_glass_defaults())
 
@@ -744,6 +748,12 @@ stairs.register_all(col .. "_wood", "cblocks:wood_" .. colours[i][1],
 	{"default_wood.png^[colorize:" .. colours[i][3]},
 	colours[i][2] .. " Wooden",
 	stairs.wood)
+
+stairs.register_all(colours[i][1] .. "_stonebrick", "cblocks:stonebrick_" .. colours[i][1],
+	{cracky = 2, stone = 1},
+	{"stone_brick.png^[colorize:" .. colours[i][3]},
+	colours[i][2] .. " Stone Brick",
+	stairs.stone, false)
 
 end --for
 
